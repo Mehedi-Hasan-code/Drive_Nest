@@ -1,4 +1,11 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "daisyui" {
-  themes: light --default;
+  themes: false;
 }
+@theme {
+  --color-mint-500: #ff0000;
+}
+:root[data-theme='dark'] {
+  --color-mint-500: #00ff00;
+}
+
