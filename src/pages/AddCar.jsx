@@ -3,6 +3,10 @@ import React from 'react';
 const AddCar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
+    const form = e.target
+    const formData = new FormData(form)
+    const carData = Object.fromEntries(formData.entries())
+    console.log(carData);
   };
   return (
     <div>
@@ -39,7 +43,7 @@ const AddCar = () => {
             {/* Availability */}
             <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-2 sm:p-4">
               <label className="label">Availability</label>
-              <select name="difficulty" className="select w-full" required>
+              <select name="Availability" className="select w-full border" required>
                 <option value="">Select Availability</option>
                 <option value="available">Available</option>
                 <option value="unavailable">Unavailable</option>
