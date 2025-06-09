@@ -8,7 +8,7 @@ const Root = () => {
     <div className='relative'>
       <div className="flex flex-col min-h-screen max-w-[1600px] mx-auto">
         <Navbar />
-        <div className="grow">
+        <div className="grow flex flex-col">
           <Outlet />
         </div>
         <Footer />

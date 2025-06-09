@@ -6,6 +6,7 @@ import AvailableCars from '../pages/AvailableCars';
 import MyCars from '../pages/MyCars';
 import AddCar from '../pages/AddCar';
 import MyBooking from '../pages/MyBooking';
+import SignUp from '../pages/SignUp';
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
       {
         path: 'login',
         Component: Login,
+      },
+      {
+        path: 'signup',
+        Component: SignUp
       },
       // Logged in users route
       // private routes

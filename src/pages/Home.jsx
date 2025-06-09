@@ -1,9 +1,18 @@
-import React from 'react'
+import React from 'react';
+import Hero from '../components/Home/Hero';
+import WhyChooseUs from '../components/Home/WhyChooseUs';
+import RecentListing from '../components/Home/RecentListing';
+import SpecialOffers from '../components/Home/SpecialOffers';
 
 const Home = () => {
   return (
-    <div className='bg-mint-500'>Home</div>
-  )
-}
+    <>
+      <Hero />
+      <WhyChooseUs />
+      <RecentListing />
+      <SpecialOffers />
+    </>
+  );
+};
 
-export default Home
+export default Home;
