@@ -9,7 +9,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { isDark, handleToggleTheme } = useContext(ThemeContext);
   const { user, signOutUser } = useContext(AuthContext);
-  console.log(user);
 
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);

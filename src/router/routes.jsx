@@ -7,6 +7,7 @@ import MyCars from '../pages/MyCars';
 import AddCar from '../pages/AddCar';
 import MyBooking from '../pages/MyBooking';
 import SignUp from '../pages/SignUp';
+import axios from 'axios';
 
 export const router = createBrowserRouter([
   {
@@ -16,10 +17,16 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+        loader: async () => {
+          const response = await axios.get(
+            `${import.meta.env.VITE_API_BASE_URL}/cars?availability=available`
+          );
+          return response.data;
+        },
       },
       {
         path: 'available-cars',
-        Component: AvailableCars
+        Component: AvailableCars,
       },
       {
         path: 'login',
@@ -27,22 +34,22 @@ export const router = createBrowserRouter([
       },
       {
         path: 'signup',
-        Component: SignUp
+        Component: SignUp,
       },
       // Logged in users route
       // private routes
       {
         path: 'add-car',
-        Component: AddCar
-      }, 
+        Component: AddCar,
+      },
       {
         path: 'my-cars',
-        Component: MyCars
-      }, 
+        Component: MyCars,
+      },
       {
         path: 'my-booking',
-        Component: MyBooking
-      }
+        Component: MyBooking,
+      },
     ],
   },
 ]);
