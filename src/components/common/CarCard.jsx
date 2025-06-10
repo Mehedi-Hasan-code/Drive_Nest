@@ -29,9 +29,9 @@ const CarCard = ({ car }) => {
     date,
   } = car;
 
-  const datePosted = dateSince(date)
+  const datePosted = dateSince(date);
   return (
-    <div className="bg-gray-900 min-h-screen flex items-center justify-center font-sans p-4">
+    <div className="flex justify-center">
       {/* --- Car Card --- */}
       <div className="bg-gray-800 text-white w-full max-w-sm rounded-2xl overflow-hidden shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30">
         {/* --- Card Image and Availability Badge --- */}
@@ -46,11 +46,14 @@ const CarCard = ({ car }) => {
                 'https://placehold.co/600x400/1f2937/ffffff?text=Image+Not+Found';
             }}
           />
-          {availability === 'available' && (
-            <span className="absolute top-4 left-4 bg-green-500 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">
-              Available
-            </span>
-          )}
+
+          <span
+            className={`absolute top-4 left-4  text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider ${
+              availability === 'available' ? 'bg-green-500' : 'bg-red-500'
+            }`}
+          >
+            {availability === 'available' ? 'Available' : 'Unavailable'}
+          </span>
         </div>
 
         {/* --- Card Content --- */}
@@ -80,7 +83,14 @@ const CarCard = ({ car }) => {
           </div>
 
           {/* --- Booking Button --- */}
-          <button className="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500/50">
+          <button
+            disabled={availability !== 'available'}
+            className={`w-full font-bold py-3 rounded-lg transition-colors duration-300 focus:outline-none focus:ring-4 ${
+              availability === 'available'
+                ? 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500/50'
+                : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+            }`}
+          >
             Book Now
           </button>
         </div>
