@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../../context/auth/AuthContext';
 
 const NavLinks = ({ onSelect }) => {
+  const { user } = useContext(AuthContext);
   const handleClick = () => {
     if (onSelect) {
       onSelect();
@@ -23,21 +25,26 @@ const NavLinks = ({ onSelect }) => {
         </NavLink>
       </li>
       {/* Logged in users*/}
-      <li>
-        <NavLink to={'/add-car'} onClick={handleClick}>
-          Add Car
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to={'/my-cars'} onClick={handleClick}>
-          My Cars
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to={'/my-booking'} onClick={handleClick}>
-          My Bookings
-        </NavLink>
-      </li>
+      {user && (
+        <>
+          {' '}
+          <li>
+            <NavLink to={'/add-car'} onClick={handleClick}>
+              Add Car
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={'/my-cars'} onClick={handleClick}>
+              My Cars
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={'/my-booking'} onClick={handleClick}>
+              My Bookings
+            </NavLink>
+          </li>{' '}
+        </>
+      )}
     </>
   );
 };

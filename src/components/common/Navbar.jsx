@@ -3,12 +3,22 @@ import NavLinks from './NavLinks';
 import ButtonPrimary from './ui/ButtonPrimary';
 import { useNavigate } from 'react-router-dom';
 import { ThemeContext } from '../../context/theme/ThemeContext';
+import { AuthContext } from '../../context/auth/AuthContext';
+import { toast } from 'react-toastify';
 const Navbar = () => {
   const navigate = useNavigate();
   const { isDark, handleToggleTheme } = useContext(ThemeContext);
-  console.log(isDark);
+  const { user, signOutUser } = useContext(AuthContext);
+  console.log(user);
+
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => toast.success('logout successful'))
+      .catch((err) => console.log(err));
+  };
 
   const handleNavigate = () => {
     navigate('/login');
@@ -88,7 +98,11 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         <div onClick={() => handleToggleTheme()}>{isDark ? '☀️' : '🌙'}</div>
-        <ButtonPrimary onClick={handleNavigate} label="Login" />
+        {user ? (
+          <ButtonPrimary onClick={handleSignOut} label="Logout" />
+        ) : (
+          <ButtonPrimary onClick={handleNavigate} label="Login" />
+        )}
       </div>
     </div>
   );

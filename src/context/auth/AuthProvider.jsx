@@ -9,7 +9,7 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth';
-import { auth } from '../services/firebase.config';
+import { auth } from '../../service/firebase.config';
 import { GoogleAuthProvider } from 'firebase/auth';
 
 const googleProvider = new GoogleAuthProvider();
