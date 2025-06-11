@@ -1,13 +1,27 @@
 import React from 'react';
+import { AuthContext } from '../context/auth/AuthContext';
+
 
 const AddCar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    const form = e.target
-    const formData = new FormData(form)
-    const carData = Object.fromEntries(formData.entries())
+
+    const date = new Date();
+    const toDay = date.toISOString().split('T')[0];
+
+    const form = e.target;
+    const formData = new FormData(form);
+    const carData = Object.fromEntries(formData.entries());
+    const featuresArr = formData.get('features').split(',');
+    const trimmedFeaturesArr = featuresArr.map((feature) => feature.trim());
+
+    carData.features = trimmedFeaturesArr;
+    carData.date = toDay;
+    carData.bookingCount = 0;
+    carData.bookingStatus = 'Not Booked';
     console.log(carData);
   };
+
   return (
     <div>
       <div className="bg-blue-200">
@@ -33,7 +47,7 @@ const AddCar = () => {
               <label className="label">Daily Rental Price</label>
               <input
                 type="text"
-                name="rentalPrice"
+                name="dailyRentalPrice"
                 className="input w-full border"
                 placeholder="Enter The Daily Rental Price Or Topic"
                 required
@@ -43,7 +57,11 @@ const AddCar = () => {
             {/* Availability */}
             <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-2 sm:p-4">
               <label className="label">Availability</label>
-              <select name="Availability" className="select w-full border" required>
+              <select
+                name="availability"
+                className="select w-full border"
+                required
+              >
                 <option value="">Select Availability</option>
                 <option value="available">Available</option>
                 <option value="unavailable">Unavailable</option>
@@ -55,7 +73,7 @@ const AddCar = () => {
               <label className="label">Vehicle Registration Number</label>
               <input
                 type="text"
-                name="registrationNumber"
+                name="vehicleRegistrationNumber"
                 className="input w-full border"
                 placeholder="Enter Vehicle Registration Number"
                 required
@@ -69,7 +87,7 @@ const AddCar = () => {
                 type="text"
                 name="features"
                 className="input w-full border"
-                placeholder="Features"
+                placeholder="Features: Separate Using Comma"
                 required
               />
             </fieldset>
@@ -93,7 +111,7 @@ const AddCar = () => {
                 type="text"
                 name="bookingCount"
                 className="input w-full border"
-                defaultValue='0'
+                defaultValue="0"
                 readOnly
                 required
               />
@@ -104,7 +122,7 @@ const AddCar = () => {
               <label className="label">Image URL</label>
               <input
                 type="text"
-                name="image"
+                name="imageUrl"
                 className="input w-full border"
                 placeholder="Enter Your Image URL"
                 required
@@ -118,7 +136,7 @@ const AddCar = () => {
                 type="text"
                 name="location"
                 className="input w-full border"
-                placeholder='Enter Your Location'
+                placeholder="Enter Your Location"
                 required
               />
             </fieldset>

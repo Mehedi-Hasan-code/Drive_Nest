@@ -8,6 +8,7 @@ import AddCar from '../pages/AddCar';
 import MyBooking from '../pages/MyBooking';
 import SignUp from '../pages/SignUp';
 import { publicApi } from '../api/publicApi';
+import CarDetails from '../pages/CarDetails';
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,11 @@ export const router = createBrowserRouter([
       {
         path: 'signup',
         Component: SignUp,
+      },
+      {
+        path: 'car-details/:id',
+        Component: CarDetails,
+        loader: async ({params}) => publicApi.get(`/cars/${params.id}`)
       },
       // Logged in users route
       // private routes

@@ -1,7 +1,9 @@
 import { Clock, Star } from 'lucide-react';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CarCard = ({ car }) => {
+  const navigate = useNavigate()
   const dateSince = (dateString) => {
     const postDate = new Date(dateString);
     const today = new Date();
@@ -30,6 +32,8 @@ const CarCard = ({ car }) => {
   } = car;
 
   const datePosted = dateSince(date);
+
+  const handleNavigate = () => navigate(`/car-details/${car._id}`)
   return (
     <div className="flex justify-center">
       {/* --- Car Card --- */}
@@ -90,6 +94,7 @@ const CarCard = ({ car }) => {
                 ? 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500/50'
                 : 'bg-gray-600 text-gray-400 cursor-not-allowed'
             }`}
+            onClick={handleNavigate}
           >
             Book Now
           </button>
