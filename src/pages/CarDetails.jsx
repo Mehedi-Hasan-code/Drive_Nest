@@ -20,8 +20,6 @@ import { useLoaderData } from 'react-router-dom';
 
 const CarDetails = () => {
   const carData = useLoaderData()
-
-  
   const [isLiked, setIsLiked] = useState(false);
   const [selectedDays, setSelectedDays] = useState(1);
 

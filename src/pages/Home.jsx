@@ -7,6 +7,7 @@ import { useLoaderData } from 'react-router-dom';
 
 const Home = () => {
   const cars = useLoaderData()
+  console.log(cars);
   return (
     <>
       <Hero />

@@ -4,6 +4,7 @@ import CarCard from '../components/common/CarCard';
 
 const AvailableCars = () => {
   const cars = useLoaderData();
+  console.log(cars);
   const [view, setView] = useState('grid')
   return (
     <div className="text-mint-500">

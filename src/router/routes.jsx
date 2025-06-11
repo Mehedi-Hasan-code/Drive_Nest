@@ -7,8 +7,9 @@ import MyCars from '../pages/MyCars';
 import AddCar from '../pages/AddCar';
 import MyBooking from '../pages/MyBooking';
 import SignUp from '../pages/SignUp';
-import { publicApi } from '../api/publicApi';
 import CarDetails from '../pages/CarDetails';
+import { publicApi } from '../api/publicApi';
+
 
 export const router = createBrowserRouter([
   {
@@ -18,12 +19,12 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
-        loader: async () => await publicApi.get(`/cars?availability=available`),
+        loader: async () => publicApi.get('/cars?availability=available')
       },
       {
         path: 'available-cars',
         Component: AvailableCars,
-        loader: async () => await publicApi.get(`/cars`),
+        loader: async () => publicApi.get('/cars')
       },
       {
         path: 'login',
