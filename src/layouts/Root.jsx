@@ -5,7 +5,7 @@ import Footer from '../components/common/Footer';
 
 const Root = () => {
   return (
-    <div className='relative'>
+    <div className='relative bg-body-bg isolate'>
       <div className="flex flex-col min-h-screen max-w-[1600px] mx-auto">
         <Navbar />
         <div className="grow flex flex-col">

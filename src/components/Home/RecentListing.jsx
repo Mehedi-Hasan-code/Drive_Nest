@@ -10,7 +10,7 @@ const RecentListing = ({ cars }) => {
   return (
     <div>
       <h1>RecentListing</h1>
-      <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {sortedCars.map((car) => (
           <CarCard key={car._id} car={car} />
         ))}

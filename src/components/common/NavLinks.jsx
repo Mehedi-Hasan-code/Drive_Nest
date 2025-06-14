@@ -34,7 +34,7 @@ const NavLinks = ({ onSelect }) => {
             </NavLink>
           </li>
           <li>
-            <NavLink to={'/my-cars'} onClick={handleClick}>
+            <NavLink to={`/my-cars?email=${user.email}`} onClick={handleClick}>
               My Cars
             </NavLink>
           </li>

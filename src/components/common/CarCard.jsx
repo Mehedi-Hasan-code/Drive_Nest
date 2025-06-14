@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const CarCard = ({ car }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dateSince = (dateString) => {
     const postDate = new Date(dateString);
     const today = new Date();
@@ -33,11 +33,11 @@ const CarCard = ({ car }) => {
 
   const datePosted = dateSince(date);
 
-  const handleNavigate = () => navigate(`/car-details/${car._id}`)
+  const handleNavigate = () => navigate(`/car-details/${car._id}`);
   return (
-    <div className="flex justify-center">
+    <>
       {/* --- Car Card --- */}
-      <div className="bg-gray-800 text-white w-full max-w-sm rounded-2xl overflow-hidden shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30">
+      <div className="bg-base  w-full  rounded-2xl overflow-hidden shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30">
         {/* --- Card Image and Availability Badge --- */}
         <div className="relative">
           <img
@@ -100,7 +100,7 @@ const CarCard = ({ car }) => {
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

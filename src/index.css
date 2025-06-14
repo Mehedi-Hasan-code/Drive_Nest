@@ -2,10 +2,18 @@
 @plugin "daisyui" {
   themes: false;
 }
+
 @theme {
-  --color-mint-500: #ff0000;
+  --color-body-bg: #e0e0e0;
+  --color-card-bg: white;
+  --color-base: #fff;
+  --color-anti-base: #000;
+  --color-h1: #000;
+  --color-h2: #000;
 }
 :root[data-theme='dark'] {
-  --color-mint-500: #00ff00;
+  --color-body-bg: #1a1d23;
+  --color-card-bg: #1a1d23;
+  --color-base: #000;
+  --color-anti-base: #fff;
 }
-

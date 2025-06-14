@@ -4,14 +4,27 @@ import CarCard from '../components/common/CarCard';
 
 const AvailableCars = () => {
   const cars = useLoaderData();
+
   console.log(cars);
-  const [view, setView] = useState('grid')
+  const [view, setView] = useState('grid');
+  const [searchQuery, setSearchQuery] = useState('')
   return (
     <div className="text-mint-500">
       <h1>Available Cars</h1>
       <div className="flex justify-between items-center mb-6">
+      <div className="flex-1 max-w-md">
+          <input
+            type="text"
+            placeholder="Search by model, brand, or location..."
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            className="w-full px-4 py-2 border border-mint-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-mint-500"
+          />
+        </div>
         <button
-          onClick={() => setView(prevMode => prevMode === 'grid' ? 'list' : 'grid')}
+          onClick={() =>
+            setView((prevMode) => (prevMode === 'grid' ? 'list' : 'grid'))
+          }
           className="px-4 py-2 bg-mint-500 text-white rounded-lg hover:bg-mint-600 transition-colors"
         >
           {view === 'grid' ? 'Switch to List View' : 'Switch to Grid View'}

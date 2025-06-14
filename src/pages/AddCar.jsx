@@ -1,5 +1,6 @@
 import React from 'react';
 import { AuthContext } from '../context/auth/AuthContext';
+import { privateApi } from '../api/privateApi';
 
 
 const AddCar = () => {
@@ -19,7 +20,9 @@ const AddCar = () => {
     carData.date = toDay;
     carData.bookingCount = 0;
     carData.bookingStatus = 'Not Booked';
-    console.log(carData);
+
+    privateApi.post(`${import.meta.env.VITE_API_BASE_URL}/cars`, carData)
+      .then(data => console.log(data))
   };
 
   return (

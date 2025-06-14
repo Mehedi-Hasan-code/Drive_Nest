@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import NavLinks from './NavLinks';
-import ButtonPrimary from './ui/ButtonPrimary';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ThemeContext } from '../../context/theme/ThemeContext';
 import { AuthContext } from '../../context/auth/AuthContext';
 import { toast } from 'react-toastify';
@@ -48,8 +47,8 @@ const Navbar = () => {
   }, [isOpen]);
 
   return (
-    <div className="navbar shadow-sm bg-red-100">
-      <div className="navbar-start">
+    <div className="navbar bg-base sticky top-4 max-w-[1600px] z-50 rounded-2xl">
+      <div className="navbar-start gap-2 sm:gap-4">
         <div className="dropdown relative" ref={dropdownRef}>
           <div role="button" className="lg:hidden">
             <label className="swap swap-rotate">
@@ -58,7 +57,7 @@ const Navbar = () => {
 
               {/* hamburger icon */}
               <svg
-                className="swap-off fill-current"
+                className="swap-off fill-current text-anti-base"
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"
                 height="32"
@@ -69,7 +68,7 @@ const Navbar = () => {
 
               {/* close icon */}
               <svg
-                className="swap-on fill-current"
+                className="swap-on fill-current text-anti-base"
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"
                 height="32"
@@ -88,19 +87,31 @@ const Navbar = () => {
             <NavLinks onSelect={closeDropdown} />
           </ul>
         </div>
-        <a className="text-xl">daisyUI</a>
+        <Link to='/' className="text-xl sm:text-2xl md:text-3xl text-anti-base font-bold">Drive Nest</Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal px-1 text-anti-base text-[1rem] font-semibold">
           <NavLinks />
         </ul>
       </div>
-      <div className="navbar-end">
+      <div className="navbar-end gap-2 sm:gap-4">
         <div onClick={() => handleToggleTheme()}>{isDark ? '☀️' : '🌙'}</div>
         {user ? (
-          <ButtonPrimary onClick={handleSignOut} label="Logout" />
+          <button
+            className="bg-body-bg rounded-xl px-6 py-2 cursor-pointer border-anti-base border-2 text-anti-base"
+            onClick={handleSignOut}
+          >
+            {' '}
+            LogOut{' '}
+          </button>
         ) : (
-          <ButtonPrimary onClick={handleNavigate} label="Login" />
+          <button
+            className="bg-body-bg rounded-xl px-6 py-2 cursor-pointer  border-anti-base border-2 text-base"
+            onClick={handleNavigate}
+          >
+            {' '}
+            Login{' '}
+          </button>
         )}
       </div>
     </div>

@@ -9,7 +9,8 @@ import MyBooking from '../pages/MyBooking';
 import SignUp from '../pages/SignUp';
 import CarDetails from '../pages/CarDetails';
 import { publicApi } from '../api/publicApi';
-
+import { CloudLightning } from 'lucide-react';
+import { privateApi } from '../api/privateApi';
 
 export const router = createBrowserRouter([
   {
@@ -19,12 +20,12 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
-        loader: async () => publicApi.get('/cars?availability=available')
+        loader: async () => publicApi.get('/cars?availability=available'),
       },
       {
         path: 'available-cars',
         Component: AvailableCars,
-        loader: async () => publicApi.get('/cars')
+        loader: async () => publicApi.get('/cars'),
       },
       {
         path: 'login',
@@ -37,7 +38,7 @@ export const router = createBrowserRouter([
       {
         path: 'car-details/:id',
         Component: CarDetails,
-        loader: async ({params}) => publicApi.get(`/cars/${params.id}`)
+        loader: async ({ params }) => publicApi.get(`/cars/${params.id}`),
       },
       // Logged in users route
       // private routes
@@ -48,6 +49,11 @@ export const router = createBrowserRouter([
       {
         path: 'my-cars',
         Component: MyCars,
+        loader: async ({ request }) => {
+          const url = new URL(request.url);
+          const email = url.searchParams.get('email');
+          return privateApi.get(`/my-cars?email=${email}`);
+        },
       },
       {
         path: 'my-booking',

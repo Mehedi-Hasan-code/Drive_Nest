@@ -4,7 +4,7 @@ import HeroImage from '../../assets/HeroImage.jpeg';
 const Hero = () => {
   return (
     <div
-      className="flex flex-col justify-center items-center"
+      className="flex flex-col justify-center items-center my-10 rounded-2xl"
       style={heroStyle}
     >
       <h1 className="text-7xl text-center">Drive Your Dreams Today</h1>

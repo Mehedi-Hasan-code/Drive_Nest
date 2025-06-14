@@ -29,25 +29,25 @@ const SpecialOffers = () => {
   ];
 
   return (
-    <section className="py-16 px-4 md:px-8 bg-gray-50">
-      <h2 className="text-4xl font-semibold text-center text-gray-800 mb-12">
+    <section className="py-16 px-4 md:px-8">
+      <h2 className="text-4xl font-semibold text-center text-anti-base mb-12">
         Special Offers
       </h2>
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {offers.map((offer, index) => (
           <motion.div
             key={offer.id}
-            className="bg-white rounded-xl p-8 shadow-lg text-center"
+            className="bg-base rounded-xl p-8 shadow-lg text-center"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: index * 0.2 }}
             whileHover={{ scale: 1.05 }}
           >
             <div className="flex justify-center mb-4">{offer.icon}</div>
-            <h3 className="text-2xl font-semibold text-gray-800 mb-3">
+            <h3 className="text-2xl font-semibold text-anti-base mb-3">
               {offer.title}
             </h3>
-            <p className="text-gray-600 text-lg mb-6">{offer.description}</p>
+            <p className="text-anti-base/70 text-lg mb-6">{offer.description}</p>
             <motion.button
               className="bg-blue-600 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition-colors duration-300"
               whileHover={{ scale: 1.1 }}
