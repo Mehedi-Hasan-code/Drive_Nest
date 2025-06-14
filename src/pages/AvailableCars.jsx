@@ -9,8 +9,8 @@ const AvailableCars = () => {
   const [view, setView] = useState('grid');
   const [searchQuery, setSearchQuery] = useState('')
   return (
-    <div className="text-mint-500">
-      <h1>Available Cars</h1>
+    <div>
+      <h1 className='text-center text-section-heading text-anti-base my-10 md:my-20 font-bold'>Available Cars</h1>
       <div className="flex justify-between items-center mb-6">
       <div className="flex-1 max-w-md">
           <input

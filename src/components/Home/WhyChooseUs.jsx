@@ -8,6 +8,7 @@ import Lottie from 'lottie-react';
 const WhyChooseUs = () => {
   return (
     <div>
+      <h1 className='text-center text-section-heading text-anti-base my-10 md:my-20 font-bold'>Why Choose Us</h1>
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
         {/* reason 1 */}
         <div className="bg-base relative rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">

@@ -4,11 +4,11 @@ import HeroImage from '../../assets/HeroImage.jpeg';
 const Hero = () => {
   return (
     <div
-      className="flex flex-col justify-center items-center my-10 rounded-2xl"
+      className="flex flex-col justify-center items-center rounded-2xl"
       style={heroStyle}
     >
-      <h1 className="text-7xl text-center">Drive Your Dreams Today</h1>
-      <button className="btn">View Available Cars</button>
+      <h1 className='text-center text-section-heading text-white font-bold px-6'>Drive Your Dreams Today</h1>
+      <button className="btn border-none bg-btn-bg rounded-2xl p-6 text-base my-6">View Available Cars</button>
     </div>
   );
 };

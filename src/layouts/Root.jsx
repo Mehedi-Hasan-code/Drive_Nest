@@ -8,7 +8,7 @@ const Root = () => {
     <div className='relative bg-body-bg isolate'>
       <div className="flex flex-col min-h-screen max-w-[1600px] mx-auto">
         <Navbar />
-        <div className="grow flex flex-col">
+        <div className="grow flex flex-col w-11/12 mx-auto">
           <Outlet />
         </div>
         <Footer />

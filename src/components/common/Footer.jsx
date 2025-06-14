@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="footer justify-center sm:justify-between sm:footer-horizontal bg-amber-50 text-base-content p-10">
+    <footer className="footer justify-center sm:justify-between sm:footer-horizontal text-anti-base bg-base p-10 rounded-2xl mt-10 md:mt-20">
       <aside>
         <img className="w-24" src="/car.png" alt="" />
         <p>

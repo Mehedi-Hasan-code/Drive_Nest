@@ -37,11 +37,11 @@ const CarCard = ({ car }) => {
   return (
     <>
       {/* --- Car Card --- */}
-      <div className="bg-base  w-full  rounded-2xl overflow-hidden shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30">
+      <div className="bg-base  w-full  rounded-2xl overflow-hidden shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30 p-4">
         {/* --- Card Image and Availability Badge --- */}
         <div className="relative">
           <img
-            className="w-full h-56 object-cover"
+            className="w-full h-56 object-cover rounded-2xl"
             src={imageUrl}
             alt={`${carModel} thumbnail`}
             onError={(e) => {
@@ -63,17 +63,17 @@ const CarCard = ({ car }) => {
         {/* --- Card Content --- */}
         <div className="p-6 space-y-4">
           {/* --- Car Model --- */}
-          <h2 className="text-2xl font-bold text-blue-400">{carModel}</h2>
+          <h2 className="text-2xl font-bold text-anti-base">{carModel}</h2>
 
           {/* --- Price and Booking Info --- */}
           <div className="flex justify-between items-center text-gray-300">
             <p className="text-xl font-semibold">
               <span className="text-blue-500">${dailyRentalPrice}</span>
-              <span className="text-sm font-normal">/day</span>
+              <span className="text-sm text-anti-base font-normal">/day</span>
             </p>
             <div className="flex items-center space-x-2">
               <Star className="w-5 h-5 text-yellow-400" />
-              <span className="font-medium">{bookingCount} Bookings</span>
+              <span className="font-medium text-anti-base">{bookingCount} Bookings</span>
             </div>
           </div>
 
@@ -81,7 +81,7 @@ const CarCard = ({ car }) => {
           <hr className="border-gray-700" />
 
           {/* --- Date Posted --- */}
-          <div className="flex items-center text-sm text-gray-400">
+          <div className="flex items-center text-sm text-anti-base">
             <Clock className="w-4 h-4 mr-2" />
             <span>{datePosted}</span>
           </div>
@@ -91,7 +91,7 @@ const CarCard = ({ car }) => {
             disabled={availability !== 'available'}
             className={`w-full font-bold py-3 rounded-lg transition-colors duration-300 focus:outline-none focus:ring-4 ${
               availability === 'available'
-                ? 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500/50'
+                ? 'bg-btn-bg text-base hover:bg-blue-700 focus:ring-blue-500/50'
                 : 'bg-gray-600 text-gray-400 cursor-not-allowed'
             }`}
             onClick={handleNavigate}

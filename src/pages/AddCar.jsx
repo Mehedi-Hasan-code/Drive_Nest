@@ -2,7 +2,6 @@ import React from 'react';
 import { AuthContext } from '../context/auth/AuthContext';
 import { privateApi } from '../api/privateApi';
 
-
 const AddCar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,48 +20,55 @@ const AddCar = () => {
     carData.bookingCount = 0;
     carData.bookingStatus = 'Not Booked';
 
-    privateApi.post(`${import.meta.env.VITE_API_BASE_URL}/cars`, carData)
-      .then(data => console.log(data))
+    privateApi
+      .post(`${import.meta.env.VITE_API_BASE_URL}/cars`, carData)
+      .then((data) => console.log(data));
   };
 
   return (
     <div>
-      <div className="bg-blue-200">
+      <div className="bg-base rounded-2xl">
         <form onSubmit={handleSubmit} className="p-2 sm:p-4">
-          <h1 className="text-4xl sm:text-5xl font-bold text-center m-12 text-emerald-800">
+          <h1 className="text-center text-section-heading text-anti-base my-10 md:my-20 font-bold">
             Add Car
           </h1>
           <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
             {/* Car Model */}
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-2 sm:p-4 ">
-              <label className="label">Car Model</label>
+            <fieldset className="fieldset border-anti-base border rounded-2xl p-2 sm:p-4">
+              <label className="label text-anti-base font-semibold">
+                Car Model
+              </label>
               <input
                 type="text"
                 name="carModel"
-                className="input w-full border"
+                className="input w-full border border-anti-base placeholder:text-anti-base text-anti-base rounded-xl"
                 placeholder="Enter Your Car Model"
                 required
               />
             </fieldset>
 
             {/* Daily Rental Price */}
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-2 sm:p-4">
-              <label className="label">Daily Rental Price</label>
+            <fieldset className="fieldset border-anti-base border rounded-2xl p-2 sm:p-4">
+              <label className="label text-anti-base font-semibold">
+                Daily Rental Price
+              </label>
               <input
                 type="text"
                 name="dailyRentalPrice"
-                className="input w-full border"
+                className="input w-full border border-anti-base placeholder:text-anti-base text-anti-base rounded-xl"
                 placeholder="Enter The Daily Rental Price Or Topic"
                 required
               />
             </fieldset>
 
             {/* Availability */}
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-2 sm:p-4">
-              <label className="label">Availability</label>
+            <fieldset className="fieldset border-anti-base border rounded-2xl p-2 sm:p-4">
+              <label className="label text-anti-base font-semibold">
+                Availability
+              </label>
               <select
                 name="availability"
-                className="select w-full border"
+                className="select bg-base w-full border border-anti-base text-anti-base"
                 required
               >
                 <option value="">Select Availability</option>
@@ -72,48 +78,56 @@ const AddCar = () => {
             </fieldset>
 
             {/* Vehicle Registration Number */}
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-2 sm:p-4">
-              <label className="label">Vehicle Registration Number</label>
+            <fieldset className="fieldset border-anti-base border rounded-2xl p-2 sm:p-4">
+              <label className="label text-anti-base font-semibold">
+                Vehicle Registration Number
+              </label>
               <input
                 type="text"
                 name="vehicleRegistrationNumber"
-                className="input w-full border"
+                className="input w-full border border-anti-base placeholder:text-anti-base text-anti-base rounded-xl"
                 placeholder="Enter Vehicle Registration Number"
                 required
               />
             </fieldset>
 
             {/* Features */}
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-2 sm:p-4">
-              <label className="label">Features</label>
+            <fieldset className="fieldset border-anti-base border rounded-2xl p-2 sm:p-4">
+              <label className="label text-anti-base font-semibold">
+                Features
+              </label>
               <input
                 type="text"
                 name="features"
-                className="input w-full border"
+                className="input w-full border border-anti-base placeholder:text-anti-base text-anti-base rounded-xl"
                 placeholder="Features: Separate Using Comma"
                 required
               />
             </fieldset>
 
             {/* Description */}
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-2 sm:p-4">
-              <label className="label">Description</label>
+            <fieldset className="fieldset border-anti-base border rounded-2xl p-2 sm:p-4">
+              <label className="label text-anti-base font-semibold">
+                Description
+              </label>
               <input
                 type="text"
                 name="description"
-                className="input w-full border"
+                className="input w-full border border-anti-base placeholder:text-anti-base text-anti-base rounded-xl"
                 placeholder="Enter Car Description"
                 required
               />
             </fieldset>
 
             {/* Booking Count */}
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-2 sm:p-4">
-              <label className="label">Booking Count</label>
+            <fieldset className="fieldset border-anti-base border rounded-2xl p-2 sm:p-4">
+              <label className="label text-anti-base font-semibold">
+                Booking Count
+              </label>
               <input
                 type="text"
                 name="bookingCount"
-                className="input w-full border"
+                className="input w-full border border-anti-base placeholder:text-anti-base text-anti-base rounded-xl"
                 defaultValue="0"
                 readOnly
                 required
@@ -121,31 +135,35 @@ const AddCar = () => {
             </fieldset>
 
             {/* image url */}
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-2 sm:p-4">
-              <label className="label">Image URL</label>
+            <fieldset className="fieldset border-anti-base border rounded-2xl p-2 sm:p-4">
+              <label className="label text-anti-base font-semibold">
+                Image URL
+              </label>
               <input
                 type="text"
                 name="imageUrl"
-                className="input w-full border"
+                className="input w-full border border-anti-base placeholder:text-anti-base text-anti-base rounded-xl"
                 placeholder="Enter Your Image URL"
                 required
               />
             </fieldset>
 
             {/* Location */}
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-2 sm:p-4">
-              <label className="label">Location</label>
+            <fieldset className="fieldset border-anti-base border rounded-2xl p-2 sm:p-4">
+              <label className="label text-anti-base font-semibold">
+                Location
+              </label>
               <input
                 type="text"
                 name="location"
-                className="input w-full border"
+                className="input w-full border border-anti-base placeholder:text-anti-base text-anti-base rounded-xl"
                 placeholder="Enter Your Location"
                 required
               />
             </fieldset>
 
             <button
-              className="btn sm:col-span-2 bg-green-600 text-white tracking-widest font-bold"
+              className="btn sm:col-span-2 bg-btn-bg border-none rounded-2xl text-base tracking-widest font-bold"
               type="submit"
             >
               {false ? <Loader /> : 'Submit'}

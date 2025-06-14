@@ -1,19 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 @import 'tailwindcss';
 @plugin "daisyui" {
   themes: false;
 }
 
+*{
+  font-family: "Poppins", sans-serif;
+}
 @theme {
+
+  /* dark white theme color */
   --color-body-bg: #e0e0e0;
-  --color-card-bg: white;
   --color-base: #fff;
   --color-anti-base: #000;
-  --color-h1: #000;
-  --color-h2: #000;
+  --color-btn-bg: #1e90ff;
+
+  /* responsive text */
+  --text-section-heading: 32px;
+  --text-section-heading: clamp(1.2rem, 5vw + 1rem, 4rem);
+  
+  
 }
 :root[data-theme='dark'] {
   --color-body-bg: #1a1d23;
-  --color-card-bg: #1a1d23;
   --color-base: #000;
   --color-anti-base: #fff;
+  --color-btn-bg: #CFCFCF
 }
