@@ -5,7 +5,12 @@ import { useNavigate } from 'react-router-dom';
 const CarCard = ({ car }) => {
   const navigate = useNavigate();
   const dateSince = (dateString) => {
-    const postDate = new Date(dateString);
+    const [day, month, year] = dateString.split('/');
+    const postDate = new Date(
+      parseInt(year),
+      parseInt(month) - 1,
+      parseInt(day)
+    );
     const today = new Date();
 
     postDate.setHours(0, 0, 0, 0);
@@ -73,7 +78,9 @@ const CarCard = ({ car }) => {
             </p>
             <div className="flex items-center space-x-2">
               <Star className="w-5 h-5 text-yellow-400" />
-              <span className="font-medium text-anti-base">{bookingCount} Bookings</span>
+              <span className="font-medium text-anti-base">
+                {bookingCount} Bookings
+              </span>
             </div>
           </div>
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { AuthContext } from '../context/auth/AuthContext';
 import { privateApi } from '../api/privateApi';
 
 const AddCar = () => {
@@ -7,7 +6,8 @@ const AddCar = () => {
     e.preventDefault();
 
     const date = new Date();
-    const toDay = date.toISOString().split('T')[0];
+    const toDay = date.toLocaleDateString()
+    console.log(toDay);
 
     const form = e.target;
     const formData = new FormData(form);

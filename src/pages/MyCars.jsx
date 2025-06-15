@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import MyCarsRow from '../components/MyCars/MyCarsRow';
 import Modal from '../components/MyCars/Modal';
 
 const MyCars = () => {
   const initialCars = useLoaderData();
+  const navigate = useNavigate()
   const [cars, setCars] = useState(initialCars);
 
   const handleDelete = (carId) => {
     setCars(cars.filter((car) => car._id !== carId));
   };
 
-  if (!cars || cars.length < 1) return <div>No car found</div>;
+  if (!cars || cars.length < 1) return <div className='flex flex-col justify-center items-center grow'>
+    <h1 className='text-center text-section-heading text-anti-base my-4 md:my-8 font-bold'>No cars found</h1>
+    <button onClick={() => navigate('/add-car')} className='btn bg-btn-bg border-none rounded-xl text-base'>Add Car</button>
+  </div>;
 
   return (
     <div className="overflow-x-auto">

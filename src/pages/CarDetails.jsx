@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
-  Car,
   MapPin,
   DollarSign,
   Navigation,
@@ -12,15 +11,28 @@ import {
   Hash,
   CheckCircle,
   Star,
-  Heart,
-  Share2,
   Phone,
 } from 'lucide-react';
 import { useLoaderData } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
+import { AuthContext } from '../context/auth/AuthContext';
+
+import 'react-datepicker/dist/react-datepicker.css';
+import { privateApi } from '../api/privateApi';
 
 const CarDetails = () => {
   const carData = useLoaderData();
+  const { user } = useContext(AuthContext);
   const [selectedDays, setSelectedDays] = useState(1);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+
+  // Update endDate when selectedDays changes
+  useEffect(() => {
+    const newEndDate = new Date(startDate);
+    newEndDate.setDate(newEndDate.getDate() + selectedDays - 1);
+    setEndDate(newEndDate);
+  }, [selectedDays, startDate]);
 
   const getFeatureIcon = (feature) => {
     switch (feature.toLowerCase()) {
@@ -34,9 +46,31 @@ const CarDetails = () => {
         return <CheckCircle className="w-5 h-5" />;
     }
   };
-  console.log(carData);
 
-  const totalPrice = selectedDays * carData.dailyRentalPrice;
+
+  // Calculate the number of days between start and end date
+  const calculateDays = () => {
+    if (!startDate || !endDate) return 0;
+    const diffTime = Math.abs(endDate - startDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays + 1;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const bookingInfo = {
+      carModel: carData.carModel,
+      carImage: carData.imageUrl,
+      carId: carData._id,
+      email: user.email,
+      startDate: startDate.toLocaleDateString(),
+      endDate: endDate.toLocaleDateString(),
+      bookingDate: new Date().toLocaleString(),
+      totalPrice: carData.dailyRentalPrice * calculateDays()
+    };
+    privateApi.post('/bookings', bookingInfo)
+  };
 
   return (
     <div className="rounded-2xl">
@@ -215,7 +249,7 @@ const CarDetails = () => {
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-anti-base">Duration</span>
                   <span className="font-medium text-anti-base">
-                    {selectedDays} {selectedDays === 1 ? 'day' : 'days'}
+                    {calculateDays()} {calculateDays() === 1 ? 'day' : 'days'}
                   </span>
                 </div>
                 <div className="border-t border-anti-base pt-2 mt-2">
@@ -224,7 +258,7 @@ const CarDetails = () => {
                       Total
                     </span>
                     <span className="font-bold text-xl text-blue-600">
-                      ${totalPrice}
+                      ${carData.dailyRentalPrice * calculateDays()}
                     </span>
                   </div>
                 </div>
@@ -263,17 +297,81 @@ const CarDetails = () => {
       {/* modal */}
       <dialog
         id={`modal-${carData._id}`}
-        className="modal modal-bottom sm:modal-middle  text-anti-base"
+        className="modal modal-bottom sm:modal-middle text-anti-base"
       >
-        <div className="modal-box bg-base border border-anti-base rounded-2xl shadow-2xl">
-          <h3 className="font-bold text-lg">Hello!</h3>
-          <p className="py-4">
-            Press ESC key or click the button below to close
-          </p>
-          <div className="modal-action">
+        <div className="modal-box bg-base border border-anti-base rounded-2xl shadow-2xl relative overflow-visible">
+          <form onSubmit={handleSubmit}>
+            <h1 className="text-4xl sm:text-5xl text-center font-semibold  text-emerald-800 my-6 p-4">
+              Booking Confirmation
+            </h1>
+            <p>You are booking for: {carData.carModel}</p>
+            <br />
+            <div className="relative">
+              <label className="label">Start Date : </label>
+              <br />
+              <div className="relative z-50 mb-4">
+                <DatePicker
+                  showIcon
+                  toggleCalendarOnIconClick
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                  className="w-full p-2 border rounded-lg"
+                  minDate={new Date()}
+                  dateFormat="dd/MM/yyyy"
+                />
+              </div>
+
+              <br />
+
+              <label className="label">End Date : </label>
+              <br />
+              <div className="relative z-50">
+                <DatePicker
+                  showIcon
+                  toggleCalendarOnIconClick
+                  selected={endDate}
+                  onChange={(date) => setEndDate(date)}
+                  className="w-full p-2 border rounded-lg"
+                  minDate={startDate}
+                  dateFormat="dd/MM/yyyy"
+                />
+              </div>
+
+              <div className="mt-4 p-4 bg-base rounded-lg">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-anti-base">Duration</span>
+                  <span className="font-medium text-anti-base">
+                    {calculateDays()} {calculateDays() === 1 ? 'day' : 'days'}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="font-semibold text-anti-base">
+                    Price Per Day
+                  </span>
+                  <span className="font-bold text-xl text-blue-600">
+                    ${carData.dailyRentalPrice}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="font-semibold text-anti-base">Total</span>
+                  <span className="font-bold text-xl text-blue-600">
+                    ${carData.dailyRentalPrice * calculateDays()}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <button
+              className="btn bg-btn-bg border-none rounded-xl text-base"
+              type="submit"
+            >
+              Submit
+            </button>
+          </form>
+          <div className="modal-action justify-start">
             <form method="dialog">
-              {/* if there is a button in form, it will close the modal */}
-              <button className="btn">Close</button>
+              <button className="btn bg-btn-bg border-none rounded-xl text-base">
+                Close
+              </button>
             </form>
           </div>
         </div>
