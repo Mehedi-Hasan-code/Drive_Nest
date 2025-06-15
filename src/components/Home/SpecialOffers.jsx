@@ -40,7 +40,7 @@ const SpecialOffers = () => {
             className="bg-base rounded-xl p-8 shadow-lg text-center"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
+            transition={{ duration: 0.2, delay: index * 0.2 }}
             whileHover={{ scale: 1.05 }}
           >
             <div className="flex justify-center mb-4">{offer.icon}</div>
@@ -49,7 +49,7 @@ const SpecialOffers = () => {
             </h3>
             <p className="text-anti-base/70 text-lg mb-6">{offer.description}</p>
             <motion.button
-              className="bg-blue-600 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition-colors duration-300"
+              className="bg-btn-bg text-base px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition-colors duration-300"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
