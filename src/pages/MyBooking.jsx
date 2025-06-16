@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import MyBookingsRow from '../components/MyBookings/MyBookingsRow';
 import MyBookingModal from '../components/MyBookings/MyBookingModal';
 
 const MyBooking = () => {
+  const navigate = useNavigate()
   const initialBookings = useLoaderData();
   const [bookings, setBookings] = useState(initialBookings);
 
@@ -15,7 +16,11 @@ const MyBooking = () => {
     );
   };
 
-  const handleDelete = () => {};
+  if(bookings.length < 1) return <div className='grow flex flex-col justify-center items-center'>
+    <h1 className='text-4xl sm:text-6xl p-2 sm:p-6 my-4 font-bold'>No bookings found!</h1>
+    <button onClick={() => navigate('/available-cars')} className='btn bg-btn-bg border-none rounded-xl text-base'>Book Now ! </button>
+  </div>
+
   return (
     <div className="w-full">
       <div className="overflow-x-auto max-w-full">
@@ -36,11 +41,7 @@ const MyBooking = () => {
           <tbody>
             {/* rows */}
             {bookings.map((booking) => (
-              <MyBookingsRow
-                key={booking._id}
-                booking={booking}
-                onDelete={handleDelete}
-              />
+              <MyBookingsRow key={booking._id} booking={booking} />
             ))}
           </tbody>
         </table>

@@ -67,9 +67,30 @@ const CarDetails = () => {
       carImage: carData.imageUrl,
       carId: carData._id,
       email: user.email,
-      startDate: startDate.toLocaleDateString(),
-      endDate: endDate.toLocaleDateString(),
-      bookingDate: new Date().toLocaleString(),
+      startDate: startDate
+        .toLocaleDateString('en-GB', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+        })
+        .replace(/\//g, '-'),
+      endDate: endDate
+        .toLocaleDateString('en-GB', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+        })
+        .replace(/\//g, '-'),
+      bookingDate: new Date()
+        .toLocaleString('en-GB', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true,
+        })
+        .replace(/\//g, '-'),
       totalPrice: carData.dailyRentalPrice * calculateDays(),
     };
     privateApi
@@ -330,7 +351,7 @@ const CarDetails = () => {
                   onChange={(date) => setStartDate(date)}
                   className="w-full p-2 border rounded-lg"
                   minDate={new Date()}
-                  dateFormat="dd/MM/yyyy"
+                  dateFormat="dd-MM-yyyy"
                 />
               </div>
 
@@ -346,7 +367,7 @@ const CarDetails = () => {
                   onChange={(date) => setEndDate(date)}
                   className="w-full p-2 border rounded-lg"
                   minDate={startDate}
-                  dateFormat="dd/MM/yyyy"
+                  dateFormat="dd-MM-yyyy"
                 />
               </div>
 

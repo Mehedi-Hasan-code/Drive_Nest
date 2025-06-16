@@ -9,7 +9,6 @@ const MyBookingModal = ({ booking, onBookingUpdate }) => {
   const [newStartDate, setNewStartDate] = useState(new Date());
   const [newEndDate, setNewEndDate] = useState(new Date());
 
-  console.log(booking);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -18,7 +17,7 @@ const MyBookingModal = ({ booking, onBookingUpdate }) => {
         const day = date.getDate().toString().padStart(2, '0');
         const month = (date.getMonth() + 1).toString().padStart(2, '0');
         const year = date.getFullYear();
-        return `${day}/${month}/${year}`;
+        return `${day}-${month}-${year}`;
       };
 
       const updatedDate = {
@@ -66,7 +65,7 @@ const MyBookingModal = ({ booking, onBookingUpdate }) => {
                 onChange={(date) => setNewStartDate(date)}
                 className="w-full p-2 border rounded-lg"
                 minDate={new Date()}
-                dateFormat="dd/MM/yyyy"
+                dateFormat="dd-MM-yyyy"
               />
             </div>
 
@@ -80,7 +79,7 @@ const MyBookingModal = ({ booking, onBookingUpdate }) => {
                 onChange={(date) => setNewEndDate(date)}
                 className="w-full p-2 border rounded-lg"
                 minDate={newStartDate}
-                dateFormat="dd/MM/yyyy"
+                dateFormat="dd-MM-yyyy"
               />
             </div>
           </div>

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const CarCard = ({ car }) => {
   const navigate = useNavigate();
   const dateSince = (dateString) => {
-    const [day, month, year] = dateString.split('/');
+    const [day, month, year] = dateString.split('-');
     const postDate = new Date(
       parseInt(year),
       parseInt(month) - 1,

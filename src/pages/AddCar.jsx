@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { privateApi } from '../api/privateApi';
-
+import Loader from '../components/common/ui/Loader';
+import { toast } from 'react-toastify';
 const AddCar = () => {
+  const [loading, setIsLoading] = useState(false)
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    setIsLoading(true)
     const date = new Date();
-    const toDay = date.toLocaleDateString()
-    console.log(toDay);
+    const toDay = `${date.getDate().toString().padStart(2, '0')}-${(
+      date.getMonth() + 1
+    )
+      .toString()
+      .padStart(2, '0')}-${date.getFullYear()}`;
 
     const form = e.target;
     const formData = new FormData(form);
@@ -22,7 +27,14 @@ const AddCar = () => {
 
     privateApi
       .post(`${import.meta.env.VITE_API_BASE_URL}/cars`, carData)
-      .then((data) => console.log(data));
+      .then((res) => {
+        if(res.acknowledged === true && res.insertedId) {
+          toast.success('Car Added !')
+        } else {
+          toast.warn('Something went wrong !')
+        }
+      })
+      .finally(() => setIsLoading(false))
   };
 
   return (
@@ -166,7 +178,7 @@ const AddCar = () => {
               className="btn sm:col-span-2 bg-btn-bg border-none rounded-2xl text-base tracking-widest font-bold"
               type="submit"
             >
-              {false ? <Loader /> : 'Submit'}
+              {loading ? <Loader /> : 'Submit'}
             </button>
           </div>
         </form>
