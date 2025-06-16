@@ -19,6 +19,8 @@ import { AuthContext } from '../context/auth/AuthContext';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import { privateApi } from '../api/privateApi';
+import { toast } from 'react-toastify';
+import Loader from '../components/common/ui/Loader';
 
 const CarDetails = () => {
   const carData = useLoaderData();
@@ -26,6 +28,7 @@ const CarDetails = () => {
   const [selectedDays, setSelectedDays] = useState(1);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const [loading, setIsLoading] = useState(false);
 
   // Update endDate when selectedDays changes
   useEffect(() => {
@@ -47,7 +50,6 @@ const CarDetails = () => {
     }
   };
 
-
   // Calculate the number of days between start and end date
   const calculateDays = () => {
     if (!startDate || !endDate) return 0;
@@ -58,6 +60,7 @@ const CarDetails = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const bookingInfo = {
       carModel: carData.carModel,
@@ -67,9 +70,18 @@ const CarDetails = () => {
       startDate: startDate.toLocaleDateString(),
       endDate: endDate.toLocaleDateString(),
       bookingDate: new Date().toLocaleString(),
-      totalPrice: carData.dailyRentalPrice * calculateDays()
+      totalPrice: carData.dailyRentalPrice * calculateDays(),
     };
-    privateApi.post('/bookings', bookingInfo)
+    privateApi
+      .post('/bookings', bookingInfo)
+      .then((res) => {
+        if (res.acknowledged === true && res.insertedId) {
+          toast.success('You have successfully booked the car');
+        } else {
+          toast.warn('Something went wrong !');
+        }
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -300,6 +312,7 @@ const CarDetails = () => {
         className="modal modal-bottom sm:modal-middle text-anti-base"
       >
         <div className="modal-box bg-base border border-anti-base rounded-2xl shadow-2xl relative overflow-visible">
+          <p>Press Esc or close btn to close the modal !</p>
           <form onSubmit={handleSubmit}>
             <h1 className="text-4xl sm:text-5xl text-center font-semibold  text-emerald-800 my-6 p-4">
               Booking Confirmation
@@ -364,11 +377,11 @@ const CarDetails = () => {
               className="btn bg-btn-bg border-none rounded-xl text-base"
               type="submit"
             >
-              Submit
+              {loading ? <Loader /> : 'Submit'}
             </button>
           </form>
           <div className="modal-action justify-start">
-            <form method="dialog">
+            <form method="dialog" className="flex justify-end w-full">
               <button className="btn bg-btn-bg border-none rounded-xl text-base">
                 Close
               </button>

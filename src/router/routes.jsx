@@ -58,6 +58,11 @@ export const router = createBrowserRouter([
       {
         path: 'my-booking',
         Component: MyBooking,
+        loader: async ({request}) => {
+          const url = new URL(request.url)
+          const email = url.searchParams.get('email')
+          return privateApi.get(`/bookings?email=${email}`)
+        }
       },
     ],
   },

@@ -12,7 +12,6 @@ const Modal = ({ car }) => {
     const featuresArr = formData.get('features').split(',');
     const trimmedFeaturesArr = featuresArr.map((feature) => feature.trim());
     updatedCarData.features = trimmedFeaturesArr;
-    console.log(updatedCarData);
   };
 
   const handleClose = () => {
@@ -28,11 +27,11 @@ const Modal = ({ car }) => {
       className="modal modal-bottom sm:modal-middle"
     >
       <div className="modal-box bg-white">
-        <p>Press ESC key or click the button below to close</p>
+        <p className='text-anti-base'>Press ESC key or click the button below to close</p>
         <div className="modal-action">
           {/* form */}
           <form method="dialog" onSubmit={handleSubmit}>
-            <h1 className="text-4xl sm:text-5xl font-bold text-center text-emerald-800 my-6">
+            <h1 className="text-4xl sm:text-5xl font-bold text-center text-anti-base my-6">
               Update Car
             </h1>
             <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
@@ -143,16 +142,18 @@ const Modal = ({ car }) => {
               </fieldset>
 
               <button
-                className="btn sm:col-span-2 bg-green-600 text-white tracking-widest font-bold"
+                className="btn sm:col-span-2 bg-btn-bg text-base rounded-2xl tracking-widest font-bold border-none"
                 type="submit"
               >
                 Submit
               </button>
             </div>
             {/* if there is a button in form, it will close the modal */}
-            <button type="button" className="btn" onClick={handleClose}>
+            <div className='flex justify-end mt-6'>
+            <button type="button" className="btn bg-btn-bg border-none rounded-xl text-base" onClick={handleClose}>
               Close
             </button>
+            </div>
           </form>
         </div>
       </div>

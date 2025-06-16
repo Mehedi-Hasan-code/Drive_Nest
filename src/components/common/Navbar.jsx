@@ -90,7 +90,7 @@ const Navbar = () => {
         </div>
         <Link
           to="/"
-          className="text-xl sm:text-2xl md:text-3xl text-anti-base font-bold"
+          className="text-xl sm:text-2xl md:text-3xl text-anti-base font-bold hidden sm:block"
         >
           Drive Nest
         </Link>

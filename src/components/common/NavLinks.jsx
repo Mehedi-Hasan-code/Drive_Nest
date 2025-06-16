@@ -39,7 +39,7 @@ const NavLinks = ({ onSelect }) => {
             </NavLink>
           </li>
           <li>
-            <NavLink to={'/my-booking'} onClick={handleClick}>
+            <NavLink to={`/my-booking?email=${user.email}`} onClick={handleClick}>
               My Bookings
             </NavLink>
           </li>{' '}
