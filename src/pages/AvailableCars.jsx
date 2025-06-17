@@ -29,7 +29,7 @@ const AvailableCars = () => {
             placeholder="Search by model, brand, or location..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-4 py-2 border border-anti-base placeholder:text-anti-base rounded-lg focus:outline-none focus:ring-2"
+            className="w-full px-4 py-2 border border-anti-base text-anti-base placeholder:text-anti-base rounded-lg focus:outline-none focus:ring-2"
           />
         </div>
 

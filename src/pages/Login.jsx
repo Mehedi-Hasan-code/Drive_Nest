@@ -54,12 +54,12 @@ const SignIn = () => {
 
   return (
     <div className="my-10 grow flex justify-center items-center mx-4">
-      <div className="card bg-amber-200 w-full max-w-sm shrink-0 shadow-2xl">
+      <div className="card bg-base rounded-2xl w-full max-w-sm shrink-0 shadow-2xl">
         <div className="card-body">
-          <h1 className="text-3xl sm:text-4xl font-bold text-center  text-green-600">
+          <h1 className="text-3xl sm:text-4xl font-bold text-center  text-anti-base">
             LogIn
           </h1>
-          <form onSubmit={handleSubmit} className="fieldset">
+          <form onSubmit={handleSubmit} className="fieldset text-anti-base">
             <label className="label">Email</label>
             <input
               type="email"
@@ -82,7 +82,7 @@ const SignIn = () => {
             {errorMessage && (
               <p className="text-red-500 text-center mt-2">{errorMessage}</p>
             )}
-            <button className="btn bg-green-600 text-white font-bold tracking-widest mt-4">
+            <button className="btn bg-btn-bg text-base rounded-2xl font-bold tracking-widest mt-4">
               {loading ? <Loader /> : 'SingIn'}
             </button>
           </form>
@@ -90,17 +90,15 @@ const SignIn = () => {
           {/* social login */}
 
           <div className="flex items-center pt-4 space-x-1">
-            <div className="flex-1 h-px w-full dark:bg-gray-300"></div>
-            <span className="text-sm px-3 dark:text-gray-600">
-              Login with social accounts
-            </span>
-            <div className="flex-1 h-px w-full dark:bg-gray-300"></div>
+            <div className="flex-1 h-px w-full"></div>
+            <span className="text-sm px-3 text-anti-base">Login with social accounts</span>
+            <div className="flex-1 h-px w-full"></div>
           </div>
           <div className="flex justify-center">
             {/* google */}
             <button
               onClick={handleLoginWithGoogle}
-              className="btn bg-white text-black border-[#e5e5e5]"
+              className="btn bg-btn-bg border-none rounded-2xl text-base border-[#e5e5e5]"
             >
               <svg
                 aria-label="Google logo"
@@ -132,7 +130,7 @@ const SignIn = () => {
               Login with Google
             </button>
           </div>
-          <p className="my-2 text-center">
+          <p className="my-2 text-center text-anti-base">
             Don't have an account ?{' '}
             <Link className="text-blue-500" to={'/signup'}>
               SignUp

@@ -50,29 +50,46 @@ const MyBooking = () => {
     );
 
   return (
-    <div className="w-full h-full flex grow items-center">
+    <div className="w-full h-full flex grow items-center justify-center">
       <div className="overflow-x-auto max-w-full bg-base rounded-2xl p-4 text-anti-base">
-        <table className="table">
+        <table className="table w-full">
           {/* head */}
           <thead>
-            <tr>
-              <th>Car Image</th>
-              <th>Car Model</th>
-              <th>Booking Date</th>
-              <th>Start Date</th>
-              <th>End Date</th>
-              <th>Total Price</th>
-              <th>Booking Status</th>
-              <th>Actions</th>
+            <tr className='bg-anti-base/10 '>
+              <th className="font-bold text-anti-base py-4 px-2">
+                Car Image
+              </th>
+              <th className="font-bold text-anti-base  py-4 px-2">
+                Car Model
+              </th>
+              <th className="font-bold text-anti-base  py-4 px-2">
+                Booking Date
+              </th>
+              <th className="font-bold text-anti-base  py-4 px-2">
+                Start Date
+              </th>
+              <th className="font-bold text-anti-base  py-4 px-2">
+                End Date
+              </th>
+              <th className="font-bold text-anti-base  py-4 px-2">
+                Total Price
+              </th>
+              <th className="font-bold text-anti-base  py-4 px-2">
+                Booking Status
+              </th>
+              <th className="font-bold text-anti-base  py-4 px-2">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
             {/* rows */}
-            {bookings.map((booking) => (
+            {bookings.map((booking, index) => (
               <MyBookingsRow
                 giveBookingStatus={handleBookingStatus}
                 key={booking._id}
                 booking={booking}
+                isEven={index % 2 === 0}
               />
             ))}
           </tbody>

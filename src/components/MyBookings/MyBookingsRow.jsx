@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/auth/AuthContext';
 
-const MyBookingsRow = ({ booking, giveBookingStatus }) => {
+const MyBookingsRow = ({ booking, giveBookingStatus, isEven }) => {
   const { user } = useContext(AuthContext);
   const {
     bookingDate,
@@ -57,33 +57,49 @@ const MyBookingsRow = ({ booking, giveBookingStatus }) => {
   };
 
   return (
-    <tr>
-      <td>
+    <tr
+      className={`transition-all duration-200 hover:bg-anti-base/20 hover:shadow-md ${
+        isEven ? 'bg-base' : 'bg-anti-base/10'
+      }`}
+    >
+      <td className="py-3 px-2">
         <div className="avatar">
           <div className="mask mask-squircle h-12 w-12">
             <img src={carImage} alt="car image" />
           </div>
         </div>
       </td>
-      <td>{carModel}</td>
-      <td>{bookingDate}</td>
-      <td>{startDate}</td>
-      <td>{endDate}</td>
-      <td>{totalPrice}</td>
-      <td>{bookingStatus}</td>
-      <th>
+      <td className="py-3 px-2 text-anti-base">{carModel}</td>
+      <td className="py-3 px-2 text-anti-base">{bookingDate}</td>
+      <td className="py-3 px-2 text-anti-base">{startDate}</td>
+      <td className="py-3 px-2 text-anti-base">{endDate}</td>
+      <td className="py-3 px-2 text-anti-base">{totalPrice}</td>
+      <td className="py-3 px-2 text-anti-base">
+        <span
+          className={`px-2 py-1 rounded-full text-xs font-medium ${
+            bookingStatus === 'confirmed'
+              ? 'bg-green-100 text-green-800'
+              : bookingStatus === 'canceled'
+              ? 'bg-red-100 text-red-800'
+              : 'bg-yellow-100 text-yellow-800'
+          }`}
+        >
+          {bookingStatus}
+        </span>
+      </td>
+      <th className="py-3 px-2">
         <div className="join join-vertical space-y-2">
           <button
             onClick={() =>
               document.getElementById(`modal-${booking._id}`).showModal()
             }
-            className="btn join-item bg-btn-bg border-none rounded-xl text-base"
+            className="btn join-item bg-btn-bg border-none rounded-xl text-base hover:scale-105 transition-transform duration-200"
           >
             Update
           </button>
           <button
             onClick={handleCancel}
-            className="btn join-item bg-btn-bg border-none rounded-xl text-base"
+            className="btn join-item bg-btn-bg border-none rounded-xl text-base hover:scale-105 transition-transform duration-200"
           >
             Cancel
           </button>

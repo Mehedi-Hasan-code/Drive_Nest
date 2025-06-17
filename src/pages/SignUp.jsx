@@ -88,12 +88,12 @@ const SignUp = () => {
 
   return (
     <div className="flex justify-center my-6 items-center">
-      <div className="card w-full max-w-sm shrink-0 shadow-2xl bg-amber-400">
+      <div className="card w-full max-w-sm shrink-0 shadow-2xl bg-base rounded-2xl">
         <div className="card-body">
-          <h1 className="text-3xl sm:text-4xl font-bold text-center text-green-600">
+          <h1 className="text-3xl sm:text-4xl font-bold text-center text-anti-base">
             SignUp Now !
           </h1>
-          <form className="fieldset" onSubmit={handleSubmit}>
+          <form className="fieldset text-anti-base" onSubmit={handleSubmit}>
             {/* name */}
             <label className="label">Name</label>
             <input
@@ -192,7 +192,7 @@ const SignUp = () => {
             )}
             <button
               type="submit"
-              className="btn bg-green-600 text-white font-bold tracking-widest mt-4"
+              className="btn bg-btn-bg border-none text-base rounded-2xl font-bold tracking-widest mt-4"
             >
               {isLoading ? <Loader /> : 'SignUp'}
             </button>
@@ -204,7 +204,7 @@ const SignUp = () => {
           <div>
             <div className="flex items-center pt-4 space-x-1">
               <div className="flex-1 h-px w-full dark:bg-gray-300"></div>
-              <span className="text-sm px-3 dark:text-gray-600">
+              <span className="text-sm px-3 text-anti-base mb-2">
                 Register with social accounts
               </span>
               <div className="flex-1 h-px w-full dark:bg-gray-300"></div>
@@ -212,7 +212,7 @@ const SignUp = () => {
             {/* social container */}
             <div className="flex justify-center">
               {/* google */}
-              <button onClick={handleSignInWithGoogle} className="btn bg-white text-black border-[#e5e5e5]">
+              <button onClick={handleSignInWithGoogle} className="btn bg-btn-bg border-none rounded-2xl text-base border-[#e5e5e5]">
                 <svg
                   aria-label="Google logo"
                   width="16"
@@ -243,7 +243,7 @@ const SignUp = () => {
                 Login with Google
               </button>
             </div>
-            <p className="my-2 text-center">
+            <p className="my-2 text-center text-anti-base">
               Already have an account ?{' '}
               <Link className="text-blue-500" to={'/login'}>
                 SignIn
