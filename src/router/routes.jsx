@@ -13,56 +13,94 @@ import Error from '../components/common/Error';
 import Loader from '../components/common/ui/Loader';
 import PrivateRoute from '../components/Private/PrivateRoute';
 
+// Helper function to handle loader errors
+const handleLoaderError = (error) => {
+  console.error('Loader error:', error);
+  // Return default values to prevent hydration issues
+  return [];
+};
+
 export const router = createBrowserRouter([
   {
     path: '/',
-    Component: Root,
+    element: <Root />,
     children: [
       {
         index: true,
-        Component: Home,
-        loader: async () => publicApi.get('/cars?availability=available'),
-        hydrateFallbackElement: <Loader />
+        element: <Home />,
+        loader: async () => {
+          try {
+            return await publicApi.get('/cars?availability=available');
+          } catch (error) {
+            return handleLoaderError(error);
+          }
+        },
+        hydrateFallbackElement: <Loader />,
       },
       {
         path: 'available-cars',
-        Component: AvailableCars,
-        loader: async () => publicApi.get('/cars'),
-        hydrateFallbackElement: <Loader />
+        element: <AvailableCars />,
+        loader: async () => {
+          try {
+            return await publicApi.get('/cars');
+          } catch (error) {
+            return handleLoaderError(error);
+          }
+        },
+        hydrateFallbackElement: <Loader />,
       },
       {
         path: 'login',
-        Component: Login,
+        element: <Login />,
       },
       {
         path: 'signup',
-        Component: SignUp,
+        element: <SignUp />,
       },
       {
         path: 'car-details/:id',
-        Component: CarDetails,
-        loader: async ({ params }) => publicApi.get(`/cars/${params.id}`),
+        element: <CarDetails />,
+        loader: async ({ params }) => {
+          try {
+            return await publicApi.get(`/cars/${params.id}`);
+          } catch (error) {
+            console.error('Car details loader error:', error);
+            throw new Error('Car not found');
+          }
+        },
         errorElement: <Error />,
-        hydrateFallbackElement: <Loader />
+        hydrateFallbackElement: <Loader />,
       },
       // Logged in users route
       // private routes
       {
         path: 'add-car',
-        element: <PrivateRoute><AddCar /></PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <AddCar />
+          </PrivateRoute>
+        ),
       },
       {
         path: 'my-cars',
-        element: <PrivateRoute><MyCars /></PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <MyCars />
+          </PrivateRoute>
+        ),
       },
       {
         path: 'my-booking',
-        element: <PrivateRoute><MyBooking /></PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <MyBooking />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '*',
+        element: <Error />,
       },
     ],
-  },
-  {
-    path: '*',
-    Component: <Error />,
   },
 ]);
