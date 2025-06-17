@@ -42,11 +42,11 @@ const CarCardList = ({ car }) => {
 
   return (
     <div className="bg-base w-full rounded-2xl overflow-hidden shadow-lg transform transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-500/30 p-4">
-      <div className="flex gap-6">
+      <div className="flex flex-col md:flex-row gap-4 md:gap-6">
         {/* --- Card Image and Availability Badge --- */}
         <div className="relative flex-shrink-0">
           <img
-            className="w-48 h-32 object-cover rounded-2xl"
+            className="w-full md:w-48 h-32 md:h-32 object-cover rounded-2xl"
             src={imageUrl}
             alt={`${carModel} thumbnail`}
             onError={(e) => {
@@ -66,37 +66,39 @@ const CarCardList = ({ car }) => {
         </div>
 
         {/* --- Card Content --- */}
-        <div className="flex-1 flex flex-col justify-between">
-          <div className="space-y-3">
+        <div className="flex-1 flex flex-col justify-between min-w-0">
+          <div className="space-y-2 md:space-y-3">
             {/* --- Car Model --- */}
-            <h2 className="text-2xl font-bold text-anti-base">{carModel}</h2>
+            <h2 className="text-lg md:text-2xl font-bold text-anti-base truncate">
+              {carModel}
+            </h2>
 
             {/* --- Price and Booking Info --- */}
-            <div className="flex justify-between items-center text-gray-300">
-              <p className="text-xl font-semibold">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-0 text-gray-300">
+              <p className="text-lg md:text-xl font-semibold">
                 <span className="text-blue-500">${dailyRentalPrice}</span>
                 <span className="text-sm text-anti-base font-normal">/day</span>
               </p>
               <div className="flex items-center space-x-2">
-                <Star className="w-5 h-5 text-yellow-400" />
-                <span className="font-medium text-anti-base">
+                <Star className="w-4 h-4 md:w-5 md:h-5 text-yellow-400" />
+                <span className="font-medium text-anti-base text-sm md:text-base">
                   {bookingCount} Bookings
                 </span>
               </div>
             </div>
 
             {/* --- Date Posted --- */}
-            <div className="flex items-center text-sm text-anti-base">
-              <Clock className="w-4 h-4 mr-2" />
+            <div className="flex items-center text-xs md:text-sm text-anti-base">
+              <Clock className="w-3 h-3 md:w-4 md:h-4 mr-2" />
               <span>{datePosted}</span>
             </div>
           </div>
 
           {/* --- Booking Button --- */}
-          <div className="flex justify-end">
+          <div className="flex justify-end mt-4 md:mt-0">
             <button
               disabled={availability !== 'available'}
-              className={`px-8 py-2 font-bold rounded-lg transition-colors duration-300 focus:outline-none focus:ring-4 ${
+              className={`px-6 md:px-8 py-2 font-bold rounded-lg transition-colors duration-300 focus:outline-none focus:ring-4 text-sm md:text-base ${
                 availability === 'available'
                   ? 'bg-btn-bg text-base hover:bg-blue-700 focus:ring-blue-500/50'
                   : 'bg-gray-600 text-gray-400 cursor-not-allowed'

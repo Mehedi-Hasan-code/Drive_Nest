@@ -176,7 +176,7 @@ const Modal = ({ car, onUpdate }) => {
                 className="btn sm:col-span-2 bg-btn-bg text-base rounded-2xl tracking-widest font-bold border-none"
                 type="submit"
               >
-                {loading ? <Loader /> : 'Submit'}
+                {loading ? <Loader /> : 'Update'}
               </button>
             </div>
             {/* if there is a button in form, it will close the modal */}

@@ -39,7 +39,7 @@ const SpecialOffers = () => {
       title: 'Weekend Special',
       description: 'Get 15% off for weekend rentals!',
       icon: <FaCalendarAlt className="w-12 h-12 text-blue-600" />,
-      buttonText: 'Book Now',
+      buttonText: 'Learn More',
     },
     {
       id: 2,
@@ -53,7 +53,7 @@ const SpecialOffers = () => {
       title: 'Holiday Package',
       description: 'Free upgrade on bookings over 7 days!',
       icon: <FaGift className="w-12 h-12 text-blue-600" />,
-      buttonText: 'View Details',
+      buttonText: 'Learn More',
     },
   ];
 

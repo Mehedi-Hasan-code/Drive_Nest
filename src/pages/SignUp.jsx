@@ -5,8 +5,10 @@ import { FaCheckCircle } from 'react-icons/fa';
 import { AuthContext } from '../context/auth/AuthContext';
 import Loader from '../components/common/ui/Loader';
 import { toast } from 'react-toastify';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const SignUp = () => {
+  useDocumentTitle('SignUp')
   const { createUser, updateUser, signInWithGoogle, setUser } =
     useContext(AuthContext);
   const [password, setPassword] = useState('');

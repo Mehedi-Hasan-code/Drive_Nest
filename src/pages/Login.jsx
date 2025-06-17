@@ -3,8 +3,10 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth/AuthContext';
 import Loader from '../components/common/ui/Loader';
 import { toast } from 'react-toastify';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const SignIn = () => {
+  useDocumentTitle('LogIn')
   const { signInByEmailAndPassword, signInWithGoogle, setUser } =
     useContext(AuthContext);
   const [loading, setIsLoading] = useState(false);

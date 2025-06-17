@@ -3,6 +3,7 @@ import { privateApi } from '../../api/privateApi';
 import Swal from 'sweetalert2';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/auth/AuthContext';
+import { Edit, Trash2 } from 'lucide-react';
 
 const MyBookingsRow = ({ booking, giveBookingStatus, isEven }) => {
   const { user } = useContext(AuthContext);
@@ -27,7 +28,8 @@ const MyBookingsRow = ({ booking, giveBookingStatus, isEven }) => {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, Cancel it!',
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
       }).then((result) => {
         if (result.isConfirmed) {
           const status = { bookingStatus: 'canceled' };
@@ -88,19 +90,21 @@ const MyBookingsRow = ({ booking, giveBookingStatus, isEven }) => {
         </span>
       </td>
       <th className="py-3 px-2">
-        <div className="join join-vertical space-y-2">
+        <div className="join join-vertical space-y-2 ">
           <button
             onClick={() =>
               document.getElementById(`modal-${booking._id}`).showModal()
             }
             className="btn join-item bg-btn-bg border-none rounded-xl text-base hover:scale-105 transition-transform duration-200"
           >
-            Update
+            <Edit className="w-4 h-4" />
+            Modify Date
           </button>
           <button
             onClick={handleCancel}
-            className="btn join-item bg-btn-bg border-none rounded-xl text-base hover:scale-105 transition-transform duration-200"
+            className="btn join-item bg-red-600 border-none rounded-xl text-base hover:scale-105 transition-transform duration-200"
           >
+            <Trash2 className="w-4 h-4 text-white" />
             Cancel
           </button>
         </div>

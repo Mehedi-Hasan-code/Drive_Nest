@@ -5,16 +5,6 @@ const Testimonial = () => {
 
   const testimonials = [
     {
-      id: 1,
-      name: 'Sarah Johnson',
-      role: 'Business Traveler',
-      image:
-        'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
-      rating: 5,
-      text: "DriveNest made my business trip seamless! The car was spotless, the pickup process was quick, and the customer service was exceptional. I'll definitely use them again for all my travel needs.",
-      car: 'Toyota Camry',
-    },
-    {
       id: 2,
       name: 'Michael Chen',
       role: 'Family Vacation',
@@ -229,46 +219,6 @@ const Testimonial = () => {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes count-up {
-          from {
-            opacity: 0;
-            transform: translateY(10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fade-in {
-          animation: fade-in 0.8s ease-out;
-        }
-
-        .animate-count {
-          animation: count-up 1s ease-out;
-        }
-
-        .animate-pulse {
-          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-
-        .animate-bounce {
-          animation: bounce 1s infinite;
-        }
-      `}</style>
     </section>
   );
 };

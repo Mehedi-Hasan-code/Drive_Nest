@@ -4,13 +4,22 @@ import { privateApi } from '../../api/privateApi';
 import Loader from '../common/ui/Loader';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/auth/AuthContext';
+import Swal from 'sweetalert2';
 
 const MyBookingModal = ({ booking, onBookingUpdate }) => {
   const { user } = useContext(AuthContext);
   const [loading, setIsLoading] = useState(false);
 
-  const [newStartDate, setNewStartDate] = useState(new Date());
-  const [newEndDate, setNewEndDate] = useState(new Date());
+  // Convert booking dates from dd-MM-yyyy format to Date objects
+  const parseDate = (dateString) => {
+    const [day, month, year] = dateString.split('-');
+    return new Date(year, month - 1, day);
+  };
+
+  const [newStartDate, setNewStartDate] = useState(
+    parseDate(booking.startDate)
+  );
+  const [newEndDate, setNewEndDate] = useState(parseDate(booking.endDate));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,27 +37,49 @@ const MyBookingModal = ({ booking, onBookingUpdate }) => {
         endDate: formatDate(newEndDate),
       };
 
-      if (user) {
-        privateApi
-          .patch(
-            `/bookings/${booking._id}/date?email=${user.email}`,
-            updatedDate
-          )
-          .then((res) => {
-            if (res.acknowledged === true && res.modifiedCount === 1) {
-              toast.success('Date updated');
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Update',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          if (user) {
+            privateApi
+              .patch(
+                `/bookings/${booking._id}/date?email=${user.email}`,
+                updatedDate
+              )
+              .then((res) => {
+                if (res.acknowledged === true && res.modifiedCount === 1) {
+                  Swal.fire({
+                    title: 'Success',
+                    text: 'Your data has been update',
+                    icon: 'success',
+                  });
 
-              const updatedBooking = {
-                ...booking,
-                startDate: updatedDate.startDate,
-                endDate: updatedDate.endDate,
-              };
-              onBookingUpdate(updatedBooking);
-            } else {
-              toast.warn('Something went wrong');
-            }
-          });
-      }
+                  const updatedBooking = {
+                    ...booking,
+                    startDate: updatedDate.startDate,
+                    endDate: updatedDate.endDate,
+                  };
+                  onBookingUpdate(updatedBooking);
+                } else if (
+                  res.acknowledged === true &&
+                  res.modifiedCount === 0 &&
+                  res.matchedCount === 1
+                ) {
+                  toast.error('Nothing to update');
+                } else {
+                  toast.error('Something went wrong');
+                }
+              });
+          }
+        }
+      });
 
       // Close the modal
       document.getElementById(`modal-${booking._id}`).close();
@@ -102,7 +133,7 @@ const MyBookingModal = ({ booking, onBookingUpdate }) => {
             className="btn bg-btn-bg border-none rounded-xl text-base"
             type="submit"
           >
-            {loading ? <Loader /> : 'Submit'}
+            {loading ? <Loader /> : 'Update'}
           </button>
         </form>
         <div className="modal-action justify-start">

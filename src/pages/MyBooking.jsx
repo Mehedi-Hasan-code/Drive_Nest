@@ -4,8 +4,10 @@ import MyBookingsRow from '../components/MyBookings/MyBookingsRow';
 import MyBookingModal from '../components/MyBookings/MyBookingModal';
 import { privateApi } from '../api/privateApi';
 import { AuthContext } from '../context/auth/AuthContext';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const MyBooking = () => {
+  useDocumentTitle('My Bookings')
   const { user } = useContext(AuthContext);
 
   const navigate = useNavigate();

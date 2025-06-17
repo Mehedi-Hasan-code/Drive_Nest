@@ -3,8 +3,12 @@ import { privateApi } from '../api/privateApi';
 import Loader from '../components/common/ui/Loader';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../context/auth/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const AddCar = () => {
+  useDocumentTitle('Add Car')
+  const navigate = useNavigate()
   const { user } = useContext(AuthContext);
   const [loading, setIsLoading] = useState(false);
   const handleSubmit = (e) => {
@@ -37,6 +41,7 @@ const AddCar = () => {
         .then((res) => {
           if (res.acknowledged === true && res.insertedId) {
             toast.success('Car Added !');
+            navigate('/my-cars')
           } else {
             toast.warn('Something went wrong !');
           }

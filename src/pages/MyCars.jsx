@@ -4,15 +4,16 @@ import MyCarsRow from '../components/MyCars/MyCarsRow';
 import Modal from '../components/MyCars/Modal';
 import { AuthContext } from '../context/auth/AuthContext';
 import { privateApi } from '../api/privateApi';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const MyCars = () => {
+  useDocumentTitle('My Cars')
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [cars, setCars] = useState([]);
   const [sortBy, setSortBy] = useState('date');
   const [sortOrder, setSortOrder] = useState('newest');
 
-  console.log(cars);
 
   useEffect(() => {
     if (user) {

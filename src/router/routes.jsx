@@ -11,6 +11,7 @@ import CarDetails from '../pages/CarDetails';
 import { publicApi } from '../api/publicApi';
 import Error from '../components/common/Error';
 import Loader from '../components/common/ui/Loader';
+import PrivateRoute from '../components/Private/PrivateRoute';
 
 export const router = createBrowserRouter([
   {
@@ -48,15 +49,15 @@ export const router = createBrowserRouter([
       // private routes
       {
         path: 'add-car',
-        Component: AddCar,
+        element: <PrivateRoute><AddCar /></PrivateRoute>
       },
       {
         path: 'my-cars',
-        Component: MyCars,
+        element: <PrivateRoute><MyCars /></PrivateRoute>
       },
       {
         path: 'my-booking',
-        Component: MyBooking,
+        element: <PrivateRoute><MyBooking /></PrivateRoute>
       },
     ],
   },
