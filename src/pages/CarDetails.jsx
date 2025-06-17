@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import {
   MapPin,
   DollarSign,
@@ -23,6 +23,7 @@ import { toast } from 'react-toastify';
 import Loader from '../components/common/ui/Loader';
 
 const CarDetails = () => {
+  const modalRef = useRef(null)
   const carData = useLoaderData();
   const { user } = useContext(AuthContext);
   const [selectedDays, setSelectedDays] = useState(1);
@@ -98,12 +99,18 @@ const CarDetails = () => {
       .then((res) => {
         if (res.acknowledged === true && res.insertedId) {
           toast.success('You have successfully booked the car');
+          handleModalClose()
         } else {
           toast.warn('Something went wrong !');
         }
       })
       .finally(() => setIsLoading(false));
   };
+  const handleModalClose = () => {
+    if(modalRef.current) {
+      modalRef.current.close()
+    }
+  }
 
   if (!carData)
     return (
@@ -343,6 +350,7 @@ const CarDetails = () => {
 
       {/* modal */}
       <dialog
+      ref={modalRef}
         id={`modal-${carData._id}`}
         className="modal modal-bottom sm:modal-middle text-anti-base"
       >

@@ -42,7 +42,7 @@ const MyBookingsRow = ({ booking, giveBookingStatus }) => {
                   text: 'Your booking has been canceled.',
                   icon: 'success',
                 });
-                giveBookingStatus(status);
+                giveBookingStatus(status, booking._id);
               }
             });
         }

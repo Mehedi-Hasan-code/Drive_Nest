@@ -4,7 +4,7 @@ import MyBookingsRow from '../components/MyBookings/MyBookingsRow';
 import MyBookingModal from '../components/MyBookings/MyBookingModal';
 
 const MyBooking = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const initialBookings = useLoaderData();
   const [bookings, setBookings] = useState(initialBookings);
 
@@ -15,12 +15,28 @@ const MyBooking = () => {
       )
     );
   };
-  const handleBookingStatus = () => {}
+  const handleBookingStatus = (bookingStatus, id) => {
+    setBookings(
+      bookings.map((booking) =>
+        booking._id === id ? { ...booking, ...bookingStatus } : booking
+      )
+    );
+  };
 
-  if(bookings.length < 1) return <div className='grow flex flex-col justify-center items-center'>
-    <h1 className='text-4xl sm:text-6xl p-2 sm:p-6 my-4 font-bold'>No bookings found!</h1>
-    <button onClick={() => navigate('/available-cars')} className='btn bg-btn-bg border-none rounded-xl text-base'>Book Now ! </button>
-  </div>
+  if (bookings.length < 1)
+    return (
+      <div className="grow flex flex-col justify-center items-center">
+        <h1 className="text-4xl sm:text-6xl p-2 sm:p-6 my-4 font-bold text-anti-base">
+          No bookings found!
+        </h1>
+        <button
+          onClick={() => navigate('/available-cars')}
+          className="btn bg-btn-bg border-none rounded-xl text-base"
+        >
+          Book Now !{' '}
+        </button>
+      </div>
+    );
 
   return (
     <div className="w-full h-full flex grow items-center">
@@ -42,7 +58,11 @@ const MyBooking = () => {
           <tbody>
             {/* rows */}
             {bookings.map((booking) => (
-              <MyBookingsRow giveBookingStatus = {handleBookingStatus} key={booking._id} booking={booking} />
+              <MyBookingsRow
+                giveBookingStatus={handleBookingStatus}
+                key={booking._id}
+                booking={booking}
+              />
             ))}
           </tbody>
         </table>
