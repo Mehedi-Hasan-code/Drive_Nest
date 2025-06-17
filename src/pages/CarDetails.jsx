@@ -23,7 +23,7 @@ import { toast } from 'react-toastify';
 import Loader from '../components/common/ui/Loader';
 
 const CarDetails = () => {
-  const modalRef = useRef(null)
+  const modalRef = useRef(null);
   const carData = useLoaderData();
   const { user } = useContext(AuthContext);
   const [selectedDays, setSelectedDays] = useState(1);
@@ -94,23 +94,27 @@ const CarDetails = () => {
         .replace(/\//g, '-'),
       totalPrice: carData.dailyRentalPrice * calculateDays(),
     };
-    privateApi
-      .post('/bookings', bookingInfo)
-      .then((res) => {
-        if (res.acknowledged === true && res.insertedId) {
-          toast.success('You have successfully booked the car');
-          handleModalClose()
-        } else {
-          toast.warn('Something went wrong !');
-        }
-      })
-      .finally(() => setIsLoading(false));
-  };
-  const handleModalClose = () => {
-    if(modalRef.current) {
-      modalRef.current.close()
+
+    if (user) {
+      privateApi
+        .post(`/bookings?email=${user.email}`, bookingInfo)
+        .then((res) => {
+          if (res.acknowledged === true && res.insertedId) {
+            toast.success('You have successfully booked the car');
+            handleModalClose();
+          } else {
+            toast.warn('Something went wrong !');
+          }
+        })
+        .finally(() => setIsLoading(false));
     }
-  }
+  };
+
+  const handleModalClose = () => {
+    if (modalRef.current) {
+      modalRef.current.close();
+    }
+  };
 
   if (!carData)
     return (
@@ -350,7 +354,7 @@ const CarDetails = () => {
 
       {/* modal */}
       <dialog
-      ref={modalRef}
+        ref={modalRef}
         id={`modal-${carData._id}`}
         className="modal modal-bottom sm:modal-middle text-anti-base"
       >

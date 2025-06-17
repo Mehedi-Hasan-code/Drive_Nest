@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MyCarsRow from '../components/MyCars/MyCarsRow';
 import Modal from '../components/MyCars/Modal';
+import { AuthContext } from '../context/auth/AuthContext';
+import { privateApi } from '../api/privateApi';
 
 const MyCars = () => {
-  const initialCars = useLoaderData();
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [cars, setCars] = useState(initialCars);
+  const [cars, setCars] = useState([]);
+
+  useEffect(() => {
+    if (user) {
+      privateApi
+        .get(`/my-cars?email=${user.email}`)
+        .then((res) => setCars(res));
+    }
+  }, [user]);
 
   const handleDelete = (carId) => {
     setCars(cars.filter((car) => car._id !== carId));

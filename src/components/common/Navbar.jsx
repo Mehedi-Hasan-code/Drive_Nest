@@ -84,7 +84,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className={`menu bg-amber-50 menu-sm absolute top-[100%] rounded-box z-1 mt-3 w-52 p-2 shadow ${
+            className={`menu bg-base text-anti-base absolute top-[165%]  p-6 rounded-2xl z-1 mt-3 w-52 shadow ${
               isOpen ? 'block' : 'hidden'
             }`}
           >

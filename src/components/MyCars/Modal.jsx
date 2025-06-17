@@ -1,9 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { privateApi } from '../../api/privateApi';
 import Loader from '../../components/common/ui/Loader'
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../context/auth/AuthContext';
 
 const Modal = ({ car, onUpdate }) => {
+  const {user} = useContext(AuthContext)
   const [loading, setLoading] = useState(false)
   const modalRef = useRef(null);
 
@@ -19,7 +21,7 @@ const Modal = ({ car, onUpdate }) => {
     updatedCarData.features = trimmedFeaturesArr;
 
     try {
-      await privateApi.patch(`/cars/${car._id}`, updatedCarData);
+      await privateApi.patch(`/cars/${car._id}?email=${user?.email}`, updatedCarData);
       onUpdate(car._id, updatedCarData);
       Swal.fire({
         title: 'Success!',

@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MyBookingsRow from '../components/MyBookings/MyBookingsRow';
 import MyBookingModal from '../components/MyBookings/MyBookingModal';
+import { privateApi } from '../api/privateApi';
+import { AuthContext } from '../context/auth/AuthContext';
 
 const MyBooking = () => {
+  const { user } = useContext(AuthContext);
+
   const navigate = useNavigate();
-  const initialBookings = useLoaderData();
-  const [bookings, setBookings] = useState(initialBookings);
+  const [bookings, setBookings] = useState([]);
+
+  useEffect(() => {
+    if (user) {
+      privateApi
+        .get(`/bookings?email=${user.email}`)
+        .then((res) => setBookings(res));
+    }
+  }, [user]);
 
   const handleBookingUpdate = (updatedBooking) => {
     setBookings(

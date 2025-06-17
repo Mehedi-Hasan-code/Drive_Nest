@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { privateApi } from '../../api/privateApi';
 import Loader from '../common/ui/Loader';
+import { toast } from 'react-toastify';
+import { AuthContext } from '../../context/auth/AuthContext';
 
 const MyBookingModal = ({ booking, onBookingUpdate }) => {
+  const { user } = useContext(AuthContext);
   const [loading, setIsLoading] = useState(false);
 
   const [newStartDate, setNewStartDate] = useState(new Date());
@@ -25,17 +28,28 @@ const MyBookingModal = ({ booking, onBookingUpdate }) => {
         endDate: formatDate(newEndDate),
       };
 
-      await privateApi.patch(`/bookings/${booking._id}/date`, updatedDate);
+      if (user) {
+        privateApi
+          .patch(
+            `/bookings/${booking._id}/date?email=${user.email}`,
+            updatedDate
+          )
+          .then((res) => {
+            if (res.acknowledged === true && res.modifiedCount === 1) {
+              toast.success('Date updated');
 
-      // Create updated booking object with new dates
-      const updatedBooking = {
-        ...booking,
-        startDate: updatedDate.startDate,
-        endDate: updatedDate.endDate,
-      };
+              const updatedBooking = {
+                ...booking,
+                startDate: updatedDate.startDate,
+                endDate: updatedDate.endDate,
+              };
+              onBookingUpdate(updatedBooking);
+            } else {
+              toast.warn('Something went wrong');
+            }
+          });
+      }
 
-      // Update the parent component with the new booking data
-      onBookingUpdate(updatedBooking);
       // Close the modal
       document.getElementById(`modal-${booking._id}`).close();
     } catch (error) {

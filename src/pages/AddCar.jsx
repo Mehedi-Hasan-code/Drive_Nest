@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { privateApi } from '../api/privateApi';
 import Loader from '../components/common/ui/Loader';
 import { toast } from 'react-toastify';
+import { AuthContext } from '../context/auth/AuthContext';
+
 const AddCar = () => {
-  const [loading, setIsLoading] = useState(false)
+  const { user } = useContext(AuthContext);
+  const [loading, setIsLoading] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(true)
+    setIsLoading(true);
     const date = new Date();
     const toDay = `${date.getDate().toString().padStart(2, '0')}-${(
       date.getMonth() + 1
@@ -25,16 +28,21 @@ const AddCar = () => {
     carData.bookingCount = 0;
     carData.bookingStatus = 'Not Booked';
 
-    privateApi
-      .post(`${import.meta.env.VITE_API_BASE_URL}/cars`, carData)
-      .then((res) => {
-        if(res.acknowledged === true && res.insertedId) {
-          toast.success('Car Added !')
-        } else {
-          toast.warn('Something went wrong !')
-        }
-      })
-      .finally(() => setIsLoading(false))
+    if (user) {
+      privateApi
+        .post(
+          `${import.meta.env.VITE_API_BASE_URL}/cars?email=${user?.email}`,
+          carData
+        )
+        .then((res) => {
+          if (res.acknowledged === true && res.insertedId) {
+            toast.success('Car Added !');
+          } else {
+            toast.warn('Something went wrong !');
+          }
+        })
+        .finally(() => setIsLoading(false));
+    }
   };
 
   return (

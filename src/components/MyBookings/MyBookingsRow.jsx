@@ -1,8 +1,11 @@
 import { toast } from 'react-toastify';
 import { privateApi } from '../../api/privateApi';
 import Swal from 'sweetalert2';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/auth/AuthContext';
 
 const MyBookingsRow = ({ booking, giveBookingStatus }) => {
+  const { user } = useContext(AuthContext);
   const {
     bookingDate,
     bookingStatus,
@@ -30,7 +33,10 @@ const MyBookingsRow = ({ booking, giveBookingStatus }) => {
           const status = { bookingStatus: 'canceled' };
 
           privateApi
-            .patch(`/bookings/${booking._id}/status`, status)
+            .patch(
+              `/bookings/${booking._id}/status?email=${user.email}`,
+              status
+            )
             .then((res) => {
               if (
                 res.acknowledged === true &&
