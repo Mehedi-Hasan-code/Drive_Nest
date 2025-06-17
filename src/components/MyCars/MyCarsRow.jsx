@@ -67,16 +67,19 @@ const MyCarsRow = ({ car, index, onDelete }) => {
         <td>{availability}</td>
         <td>{date}</td>
         <th>
-          <div className="join join-vertical">
+          <div className="join join-vertical space-y-2">
             <button
-              onClick={() =>
-                document.getElementById(`my_modal-${car._id}`).showModal()
-              }
-              className="btn join-item"
+              onClick={() => {
+                document.getElementById(`my_modal-${car._id}`).showModal();
+              }}
+              className="btn bg-btn-bg border-none rounded-xl text-base join-item"
             >
               Update
             </button>
-            <button onClick={handleDelete} className="btn join-item">
+            <button
+              onClick={handleDelete}
+              className="btn bg-btn-bg border-none rounded-xl text-base join-item"
+            >
               Delete
             </button>
           </div>

@@ -15,6 +15,7 @@ const MyBooking = () => {
       )
     );
   };
+  const handleBookingStatus = () => {}
 
   if(bookings.length < 1) return <div className='grow flex flex-col justify-center items-center'>
     <h1 className='text-4xl sm:text-6xl p-2 sm:p-6 my-4 font-bold'>No bookings found!</h1>
@@ -22,9 +23,9 @@ const MyBooking = () => {
   </div>
 
   return (
-    <div className="w-full">
-      <div className="overflow-x-auto max-w-full">
-        <table className="table bg-white">
+    <div className="w-full h-full flex grow items-center">
+      <div className="overflow-x-auto max-w-full bg-base rounded-2xl p-4 text-anti-base">
+        <table className="table">
           {/* head */}
           <thead>
             <tr>
@@ -41,7 +42,7 @@ const MyBooking = () => {
           <tbody>
             {/* rows */}
             {bookings.map((booking) => (
-              <MyBookingsRow key={booking._id} booking={booking} />
+              <MyBookingsRow giveBookingStatus = {handleBookingStatus} key={booking._id} booking={booking} />
             ))}
           </tbody>
         </table>

@@ -5,11 +5,10 @@
   themes: false;
 }
 
-*{
-  font-family: "Poppins", sans-serif;
+* {
+  font-family: 'Poppins', sans-serif;
 }
 @theme {
-
   /* dark white theme color */
   --color-body-bg: #e0e0e0;
   --color-base: #fff;
@@ -19,12 +18,54 @@
   /* responsive text */
   --text-section-heading: 32px;
   --text-section-heading: clamp(1.2rem, 5vw + 1rem, 4rem);
-  
-  
 }
 :root[data-theme='dark'] {
   --color-body-bg: #1a1d23;
   --color-base: #000;
   --color-anti-base: #fff;
-  --color-btn-bg: #CFCFCF
+  --color-btn-bg: #cfcfcf;
+}
+
+/* Custom Scrollbar Styling */
+/* Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+/* Dark theme scrollbar */
+:root[data-theme='dark'] ::-webkit-scrollbar-track {
+  background: #2a2a2a;
+}
+
+:root[data-theme='dark'] ::-webkit-scrollbar-thumb {
+  background: #666;
+}
+
+:root[data-theme='dark'] ::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+:root[data-theme='dark'] * {
+  scrollbar-color: #666 #2a2a2a;
 }

@@ -1,17 +1,44 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import { privateApi } from '../../api/privateApi';
+import Loader from '../../components/common/ui/Loader'
+import Swal from 'sweetalert2';
 
-const Modal = ({ car }) => {
+const Modal = ({ car, onUpdate }) => {
+  const [loading, setLoading] = useState(false)
   const modalRef = useRef(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const form = e.target 
-    const formData = new FormData(form)
-    const updatedCarData = Object.fromEntries(formData.entries())
+    setLoading(true)
+    const form = e.target;
+    const formData = new FormData(form);
+    const updatedCarData = Object.fromEntries(formData.entries());
 
     const featuresArr = formData.get('features').split(',');
     const trimmedFeaturesArr = featuresArr.map((feature) => feature.trim());
     updatedCarData.features = trimmedFeaturesArr;
+
+    try {
+      await privateApi.patch(`/cars/${car._id}`, updatedCarData);
+      onUpdate(car._id, updatedCarData);
+      Swal.fire({
+        title: 'Success!',
+        text: 'Car updated successfully',
+        icon: 'success',
+        timer: 2000,
+        showConfirmButton: false,
+      });
+      setLoading(false)
+      handleClose();
+    } catch (error) {
+      console.error('Error updating car:', error);
+      Swal.fire({
+        title: 'Error!',
+        text: 'Failed to update car. Please try again.',
+        icon: 'error',
+      });
+      setLoading(false)
+    }
   };
 
   const handleClose = () => {
@@ -26,12 +53,14 @@ const Modal = ({ car }) => {
       id={`my_modal-${car._id}`}
       className="modal modal-bottom sm:modal-middle"
     >
-      <div className="modal-box bg-white">
-        <p className='text-anti-base'>Press ESC key or click the button below to close</p>
+      <div className="modal-box bg-base text-anti-base">
+        <p>
+          Press ESC key or click the button below to close
+        </p>
         <div className="modal-action">
           {/* form */}
           <form method="dialog" onSubmit={handleSubmit}>
-            <h1 className="text-4xl sm:text-5xl font-bold text-center text-anti-base my-6">
+            <h1 className="text-4xl sm:text-5xl font-bold text-center my-6">
               Update Car
             </h1>
             <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
@@ -66,7 +95,7 @@ const Modal = ({ car }) => {
                 <label className="label">Availability</label>
                 <select
                   name="availability"
-                  className="select w-full border"
+                  className="select w-full border bg-base"
                   defaultValue={car.availability}
                   required
                 >
@@ -145,14 +174,18 @@ const Modal = ({ car }) => {
                 className="btn sm:col-span-2 bg-btn-bg text-base rounded-2xl tracking-widest font-bold border-none"
                 type="submit"
               >
-                Submit
+                {loading ? <Loader /> : 'Submit'}
               </button>
             </div>
             {/* if there is a button in form, it will close the modal */}
-            <div className='flex justify-end mt-6'>
-            <button type="button" className="btn bg-btn-bg border-none rounded-xl text-base" onClick={handleClose}>
-              Close
-            </button>
+            <div className="flex justify-end mt-6">
+              <button
+                type="button"
+                className="btn bg-btn-bg border-none rounded-xl text-base"
+                onClick={handleClose}
+              >
+                Close
+              </button>
             </div>
           </form>
         </div>

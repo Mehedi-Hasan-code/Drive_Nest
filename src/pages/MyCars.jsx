@@ -12,6 +12,12 @@ const MyCars = () => {
     setCars(cars.filter((car) => car._id !== carId));
   };
 
+  const handleUpdate = (carId, updatedData) => {
+    setCars(
+      cars.map((car) => (car._id === carId ? { ...car, ...updatedData } : car))
+    );
+  };
+
   if (!cars || cars.length < 1)
     return (
       <div className="flex flex-col justify-center items-center grow">
@@ -28,9 +34,9 @@ const MyCars = () => {
     );
 
   return (
-    <div className="w-full">
-      <div className="overflow-x-auto max-w-full">
-        <table className="table bg-white">
+    <div className="w-full grow flex items-center">
+      <div className="overflow-x-auto max-w-full p-6 bg-base rounded-2xl">
+        <table className="table  text-anti-base ">
           {/* head */}
           <thead>
             <tr>
@@ -58,7 +64,7 @@ const MyCars = () => {
         </table>
       </div>
       {cars.map((car) => (
-        <Modal key={car._id} car={car} />
+        <Modal key={car._id} car={car} onUpdate={handleUpdate} />
       ))}
     </div>
   );

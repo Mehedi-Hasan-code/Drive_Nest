@@ -105,6 +105,20 @@ const CarDetails = () => {
       .finally(() => setIsLoading(false));
   };
 
+  if (!carData)
+    return (
+      <div className="grow flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-anti-base mb-2">
+            No Car Found
+          </h2>
+          <p className="text-anti-base/70">
+            The car you're looking for doesn't exist or has been removed.
+          </p>
+        </div>
+      </div>
+    );
+
   return (
     <div className="rounded-2xl">
       <div className="py-10">

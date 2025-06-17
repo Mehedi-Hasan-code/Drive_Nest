@@ -11,6 +11,8 @@ import CarDetails from '../pages/CarDetails';
 import { publicApi } from '../api/publicApi';
 import { CloudLightning } from 'lucide-react';
 import { privateApi } from '../api/privateApi';
+import Error from '../components/common/Error';
+import Loader from '../components/common/ui/Loader';
 
 export const router = createBrowserRouter([
   {
@@ -21,11 +23,13 @@ export const router = createBrowserRouter([
         index: true,
         Component: Home,
         loader: async () => publicApi.get('/cars?availability=available'),
+        hydrateFallbackElement: <Loader />
       },
       {
         path: 'available-cars',
         Component: AvailableCars,
         loader: async () => publicApi.get('/cars'),
+        hydrateFallbackElement: <Loader />
       },
       {
         path: 'login',
@@ -39,6 +43,8 @@ export const router = createBrowserRouter([
         path: 'car-details/:id',
         Component: CarDetails,
         loader: async ({ params }) => publicApi.get(`/cars/${params.id}`),
+        errorElement: <Error />,
+        hydrateFallbackElement: <Loader />
       },
       // Logged in users route
       // private routes
@@ -54,16 +60,22 @@ export const router = createBrowserRouter([
           const email = url.searchParams.get('email');
           return privateApi.get(`/my-cars?email=${email}`);
         },
+        hydrateFallbackElement: <Loader />
       },
       {
         path: 'my-booking',
         Component: MyBooking,
-        loader: async ({request}) => {
-          const url = new URL(request.url)
-          const email = url.searchParams.get('email')
-          return privateApi.get(`/bookings?email=${email}`)
-        }
+        loader: async ({ request }) => {
+          const url = new URL(request.url);
+          const email = url.searchParams.get('email');
+          return privateApi.get(`/bookings?email=${email}`);
+        },
+        hydrateFallbackElement: <Loader />
       },
     ],
+  },
+  {
+    path: '*',
+    Component: <Error />,
   },
 ]);

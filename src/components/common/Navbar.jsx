@@ -50,6 +50,9 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base  sticky top-0 w-11/12 mx-auto  z-50 rounded-2xl mb-2">
       <div className="navbar-start gap-2 sm:gap-4">
+        <div className='w-18 hidden xl:block'>
+          <img className='w-full' src="car.png" alt="car logo" />
+        </div>
         <div className="dropdown relative" ref={dropdownRef}>
           <div role="button" className="lg:hidden">
             <label className="swap swap-rotate">

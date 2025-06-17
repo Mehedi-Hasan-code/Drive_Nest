@@ -4,6 +4,7 @@ import WhyChooseUs from '../components/Home/WhyChooseUs';
 import RecentListing from '../components/Home/RecentListing';
 import SpecialOffers from '../components/Home/SpecialOffers';
 import { useLoaderData } from 'react-router-dom';
+import Testimonial from '../components/Home/Testimonial';
 
 const Home = () => {
   const cars = useLoaderData()
@@ -14,6 +15,7 @@ const Home = () => {
       <WhyChooseUs />
       <RecentListing cars = {cars} />
       <SpecialOffers />
+      <Testimonial />
     </>
   );
 };

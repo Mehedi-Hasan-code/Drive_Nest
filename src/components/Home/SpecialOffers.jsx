@@ -1,7 +1,36 @@
 import React from 'react';
 // eslint-disable-next-line no-unused-vars
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { FaCar, FaCalendarAlt, FaGift } from 'react-icons/fa';
+
+const OfferCard = ({ offer, index }) => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: false, amount: 0.3 });
+
+  return (
+    <motion.div
+      ref={ref}
+      className="bg-base rounded-xl p-8 shadow-lg text-center"
+      initial={{ opacity: 0, x: -50 }}
+      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+      transition={{ duration: 0.2, delay: index * 0.2 }}
+      whileHover={{ scale: 1.05 }}
+    >
+      <div className="flex justify-center mb-4">{offer.icon}</div>
+      <h3 className="text-2xl font-semibold text-anti-base mb-3">
+        {offer.title}
+      </h3>
+      <p className="text-anti-base/70 text-lg mb-6">{offer.description}</p>
+      <motion.button
+        className="bg-btn-bg text-base px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition-colors duration-300"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        {offer.buttonText}
+      </motion.button>
+    </motion.div>
+  );
+};
 
 const SpecialOffers = () => {
   const offers = [
@@ -30,32 +59,12 @@ const SpecialOffers = () => {
 
   return (
     <section>
-      <h1 className='text-center text-section-heading text-anti-base my-10 md:my-20 font-bold'>
+      <h1 className="text-center text-section-heading text-anti-base my-10 md:my-20 font-bold">
         Special Offers
       </h1>
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {offers.map((offer, index) => (
-          <motion.div
-            key={offer.id}
-            className="bg-base rounded-xl p-8 shadow-lg text-center"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.2, delay: index * 0.2 }}
-            whileHover={{ scale: 1.05 }}
-          >
-            <div className="flex justify-center mb-4">{offer.icon}</div>
-            <h3 className="text-2xl font-semibold text-anti-base mb-3">
-              {offer.title}
-            </h3>
-            <p className="text-anti-base/70 text-lg mb-6">{offer.description}</p>
-            <motion.button
-              className="bg-btn-bg text-base px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition-colors duration-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {offer.buttonText}
-            </motion.button>
-          </motion.div>
+          <OfferCard key={offer.id} offer={offer} index={index} />
         ))}
       </div>
     </section>

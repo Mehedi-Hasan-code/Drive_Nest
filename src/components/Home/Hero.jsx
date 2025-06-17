@@ -1,14 +1,16 @@
 import React from 'react';
 import HeroImage from '../../assets/HeroImage.jpeg';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+  const navigate = useNavigate()
   return (
     <div
       className="flex flex-col justify-center items-center rounded-2xl"
       style={heroStyle}
     >
       <h1 className='text-center text-section-heading text-white font-bold px-6'>Drive Your Dreams Today</h1>
-      <button className="btn border-none bg-btn-bg rounded-2xl p-6 text-base my-6">View Available Cars</button>
+      <button onClick={() => navigate('/available-cars')} className="btn border-none bg-btn-bg rounded-2xl p-6 text-base my-6">View Available Cars</button>
     </div>
   );
 };
