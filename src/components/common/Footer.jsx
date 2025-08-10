@@ -15,23 +15,100 @@ const Footer = () => {
           </aside>
           <nav>
             <h6 className="footer-title">Services</h6>
-            <a className="link link-hover">Branding</a>
-            <a className="link link-hover">Design</a>
-            <a className="link link-hover">Marketing</a>
-            <a className="link link-hover">Advertisement</a>
+            <a
+              className="link link-hover"
+              href="https://example.com/branding"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Branding
+            </a>
+            <a
+              className="link link-hover"
+              href="https://example.com/design"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Design
+            </a>
+            <a
+              className="link link-hover"
+              href="https://example.com/marketing"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Marketing
+            </a>
+            <a
+              className="link link-hover"
+              href="https://example.com/advertisement"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Advertisement
+            </a>
           </nav>
           <nav>
             <h6 className="footer-title">Social</h6>
-            <a className="link link-hover">Twitter</a>
-            <a className="link link-hover">Instagram</a>
-            <a className="link link-hover">Facebook</a>
-            <a className="link link-hover">GitHub</a>
+            <a
+              className="link link-hover"
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Twitter
+            </a>
+            <a
+              className="link link-hover"
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Instagram
+            </a>
+            <a
+              className="link link-hover"
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Facebook
+            </a>
+            <a
+              className="link link-hover"
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
           </nav>
           <nav>
             <h6 className="footer-title">Legal</h6>
-            <a className="link link-hover">Terms of use</a>
-            <a className="link link-hover">Privacy policy</a>
-            <a className="link link-hover">Cookie policy</a>
+            <a
+              className="link link-hover"
+              href="https://example.com/terms"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Terms of use
+            </a>
+            <a
+              className="link link-hover"
+              href="https://example.com/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Privacy policy
+            </a>
+            <a
+              className="link link-hover"
+              href="https://example.com/cookie"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Cookie policy
+            </a>
           </nav>
         </footer>
       </div>
