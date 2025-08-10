@@ -2,10 +2,12 @@ import React from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion, useInView } from 'framer-motion';
 import { FaCar, FaCalendarAlt, FaGift } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const OfferCard = ({ offer, index }) => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.3 });
+  const navigate = useNavigate()
 
   return (
     <motion.div
@@ -25,6 +27,7 @@ const OfferCard = ({ offer, index }) => {
         className="bg-btn-bg text-base px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition-colors duration-300"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
+        onClick={() => navigate('/available-cars')}
       >
         {offer.buttonText}
       </motion.button>

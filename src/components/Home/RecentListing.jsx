@@ -1,7 +1,23 @@
 import React from 'react';
 import CarCard from '../common/CarCard';
 
-const RecentListing = ({ cars }) => {
+const RecentListing = ({ cars, error }) => {
+  if (error) {
+    return (
+      <div className="text-center text-red-500 my-10 md:my-20">
+        Failed to load listings. Please try again later.
+      </div>
+    );
+  }
+
+  if (!cars || cars.length === 0) {
+    return (
+      <div className="text-center text-gray-500 my-10 md:my-20">
+        No recent listings available.
+      </div>
+    );
+  }
+
   const sortedCars = [...cars].sort((a, b) => {
     const parseDate = (dateStr) => {
       const [day, month, year] = dateStr.split('-').map(Number);
