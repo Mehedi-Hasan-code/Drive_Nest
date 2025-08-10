@@ -12,6 +12,7 @@ import { publicApi } from '../api/publicApi';
 import Error from '../components/common/Error';
 import Loader from '../components/common/ui/Loader';
 import PrivateRoute from '../components/Private/PrivateRoute';
+import Contact from '../pages/Contact';
 
 // Helper function to handle loader errors
 const handleLoaderError = (error) => {
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
           }
         },
         hydrateFallbackElement: <Loader />,
+      },
+      {
+        path: 'contact-us',
+        element: <Contact />
       },
       {
         path: 'login',

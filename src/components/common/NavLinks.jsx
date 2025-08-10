@@ -24,6 +24,11 @@ const NavLinks = ({ onSelect }) => {
           Available Cars
         </NavLink>
       </li>
+      <li>
+        <NavLink to={'/contact-us'} onClick={handleClick}>
+          Contact Us
+        </NavLink>
+      </li>
       {/* Logged in users*/}
       {user && (
         <>
