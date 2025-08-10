@@ -9,14 +9,13 @@ const Root = () => {
     <div className="relative bg-body-bg isolate">
       <Navbar />
       <div className="flex flex-col min-h-screen max-w-[1600px] mx-auto">
-        
         <div className="grow flex flex-col w-11/12 mx-auto">
           {location.state === 'loading' ? <Loader /> : <Outlet />}
         </div>
-        <Footer />
       </div>
       <div style={gridLines} className="-z-10 absolute inset-0"></div>
       <div style={gridDots} className="-z-10 absolute inset-0"></div>
+      <Footer />
     </div>
   );
 };
