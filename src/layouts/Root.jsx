@@ -7,8 +7,9 @@ const Root = () => {
   const location = useLocation();
   return (
     <div className="relative bg-body-bg isolate">
+      <Navbar />
       <div className="flex flex-col min-h-screen max-w-[1600px] mx-auto">
-        <Navbar />
+        
         <div className="grow flex flex-col w-11/12 mx-auto">
           {location.state === 'loading' ? <Loader /> : <Outlet />}
         </div>
